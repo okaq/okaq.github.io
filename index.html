@@ -1,7 +1,9 @@
 <!DOCTYPE html>
-<html>
-    <head>
+<html lang="en">
+    <head id="zeta">
         <title>okaq</title>
+        <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+        <meta name="viewport" content="width=1920,height=1080,initial-scale=1" />
         <link rel="shortcut icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAIAAAD8GO2jAAAAMklEQVR4nGJxzPzPQEvARFPTRy0YtWDUglELRi0YtWDUglELRi0YtWDUAioCQAAAAP//0ssB7LPxfD4AAAAASUVORK5CYII=" />
         <style type="text/css">
             html,body{width:1920px;height:1080px;background-color:rgba(255,255,255,1.0);}
@@ -34,7 +36,26 @@ var g = {
 // layout
 var lay = {
     "init": function() {
+        lay.alpha = document.getElementById("alpha"); // body
         lay.list = [];
+        for (var i = 0; i < g.tot; i++) {
+            var c0 = new cell();
+            c0.can = document.createElement("canvas");
+            c0.can.width = g.minx;
+            c0.can.height = g.miny;
+            c0.con = c0.can.getContext("2d");
+            var ix = i % g.totx;
+            var iy = (i / g.totx) >>> 0;
+            c0.x = ix * g.minx;
+            c0.y = iy * g.miny;
+            c0.w = g.minx;
+            c0.h = g.miny;
+            c0.init();
+            // style
+            c0.can.style.position = "absolute";
+            
+            lay.list.append(c0);
+        }
     }
 }
 // cell class
@@ -47,6 +68,9 @@ var cell = function() {
     this.h = 0;
     this.data = []; // 8x8 bitmap
     this.gens = []; // 5x5 ikasu list 
+    this.init = function() {
+        // set data
+    }
 }
 // ikasu class
 var ikasu = function() {
@@ -54,9 +78,15 @@ var ikasu = function() {
     this.x0 = 0;
     this.y0 = 0;
 }
+// render class
+// knows which layout cells need to be rendered
+var render = {
+    "draw": function {
+    }
+}
         </script>
     </head>
-    <body>
+    <body id="alpha">
         <!--
         <h1>okaq bitstarter</h1>
         <h2>nano games at peta scale</h2>

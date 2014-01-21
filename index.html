@@ -9,6 +9,19 @@
         <script type="text/javascript">
 // ok
 console.log("ok okaq github...");
+// async_load
+(function() {
+    var async_load = function() {
+        g.inti();
+    }
+    window.addEventListener("load", async_load, false);    
+})();
+// game
+var g = {
+    "init": function() {
+        console.log("g init.");
+    }
+}
         </script>
     </head>
     <body>

@@ -12,7 +12,7 @@ console.log("ok okaq github...");
 // async_load
 (function() {
     var async_load = function() {
-        g.inti();
+        g.init();
     }
     window.addEventListener("load", async_load, false);    
 })();
@@ -20,13 +20,47 @@ console.log("ok okaq github...");
 var g = {
     "init": function() {
         console.log("g init.");
+        g.width = 1920;
+        g.height = 1080;
+        g.minx = 32;
+        g.miny = 32;
+        g.totx = (g.width / g.minx) >>> 0;
+        g.toty = (g.height / g.miny) >>> 0;
+        g.tot = g.totx * g.toty;
+        console.log("tot: " + g.tot + " totx: " + g.totx + " toty: " + g.toty);
+        lay.init();
     }
+}
+// layout
+var lay = {
+    "init": function() {
+        lay.list = [];
+    }
+}
+// cell class
+var cell = function() {
+    this.can = null; // canvas
+    this.con = null; // 2d context
+    this.x = 0; // layout in document body
+    this.y = 0;
+    this.w = 0; // size
+    this.h = 0;
+    this.data = []; // 8x8 bitmap
+    this.gens = []; // 5x5 ikasu list 
+}
+// ikasu class
+var ikasu = function() {
+    this.data = [];
+    this.x0 = 0;
+    this.y0 = 0;
 }
         </script>
     </head>
     <body>
+        <!--
         <h1>okaq bitstarter</h1>
         <h2>nano games at peta scale</h2>
         <h3>contact : <a href="mailto:aq@okaq.com?Subject=Hi" target="_top">AQ@OKAQ.COM</a></h3>
+        -->
     </body>
 </html>

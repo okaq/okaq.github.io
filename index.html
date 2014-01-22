@@ -59,6 +59,17 @@ var lay = {
             lay.list.push(c0);
             lay.alpha.appendChild(c0.can);
         }
+        // lay.beta bitstarter 1st-third
+        lay.beta = document.createElement("canvas");
+        lay.beta.can = lay.beta;
+        lay.beta.con = lay.beta.can.getContext("2d");
+        lay.beta.width = g.width;
+        lay.beta.height = (g.height / 3) >>> 0;
+        lay.beta.style.zIndex = 1;
+        lay.beta.style.position = "absolute";
+        lay.beta.style.top = "0px";
+        lay.beta.style.left = "0px";
+        lay.alpha.appendChild(lay.beta);
     }
 }
 // cell class
@@ -74,6 +85,7 @@ var cell = function() {
     this.init = function() {
         // set data
     }
+    this.color = []; // set of c.struct
 }
 // ikasu class
 var ikasu = function() {
@@ -84,21 +96,30 @@ var ikasu = function() {
 // render class
 // knows which layout cells need to be rendered
 var render = {
+    "init": function() {
+        render.scene = []; // from layout
+    },
     "draw": function() {
         for (var i = 0; i < g.tot; i++) {
             // margins
             var m0 = 4;
             var m1 = m0 * 2;
-            lay.list[i].con.fillStyle = c.rand();
+            lay.list[i].con.fillStyle = c.rand(1.0);
             lay.list[i].con.fillRect(m0, m0, lay.list[i].w - m1, lay.list[i].h - m1);
             // lay.list[i].con.fillRect(lay.list[i].x + m0, lay.list[i].y + m0, lay.list[i].w - m1, lay.list[i].h - m1);
         }
+        lay.beta.con.fillStyle = c.rand();
+        lay.beta.con.fillRect(0,0,lay.beta.can.width,lay.beta.can.height);
+        lay.beta.con.fillStyle = "rgba(255,255,255,1.0)";
+        lay.beta.con.font = "128px Sans-Serif";
+        lay.beta.con.fillText("B I T S T A R T E R", 200, 200);
     }
 }
 // color
 var c = {
-    "rand": function() {
-        var r0 = [c.rb(),c.rb(),c.rb(),1.0];
+    "rand": function(a1) {
+        var a0 = a1 || Math.random();
+        var r0 = [c.rb(),c.rb(),c.rb(),a0];
         var s0 = r0.join(",");
         var s1 = "rgba(" + s0 + ")";
         return s1;
@@ -106,7 +127,21 @@ var c = {
     "rb": function() {
         r0 = ((Math.random() * 255) >>> 0);
         return r0;
-    }
+    },
+    "rgba": function() {
+        this.A = 0;
+        this.R = 0;
+        this.G = 0;
+        this.B = 0;
+        this.css = function() {
+            // css string
+        }
+    },
+    "randRgba": function(n0) {
+        // return collection of randomized c.struct, len n0
+        // generalized RGBA, HSLA classes
+        // with interfaces for random, math, etc
+    },
 }
         </script>
     </head>

@@ -53,8 +53,10 @@ var lay = {
             c0.init();
             // style
             c0.can.style.position = "absolute";
-            
+            c0.can.style.left = c0.x + "px";
+            c0.can.style.top = c0.y + "px";
             lay.list.append(c0);
+            lay.alpha.appendChild(c0);
         }
     }
 }
@@ -81,7 +83,28 @@ var ikasu = function() {
 // render class
 // knows which layout cells need to be rendered
 var render = {
-    "draw": function {
+    "draw": function() {
+        for (var i = 0; i < g.tot; i++) {
+            // margins
+            var m0 = 4;
+            var m1 = m0 * 2;
+            lay.list[i].con.fillStyle = c.rand();
+            lay.list[i].con.fillRect(m0, m0, lay.list[i].w - m1, lay.list[i].h - m1);
+            // lay.list[i].con.fillRect(lay.list[i].x + m0, lay.list[i].y + m0, lay.list[i].w - m1, lay.list[i].h - m1);
+        }
+    }
+}
+// color
+var c = {
+    "rand": function() {
+        var r0 = [c.rb(),c.rb(),c.rb(),1.0];
+        var s0 = r0.join(",");
+        var s1 = "rgba(" + s0 + ")";
+        return s1;
+    },
+    "rb": function() {
+        r0 = ((Math.random() * 255) >>> 0);
+        return r0;
     }
 }
         </script>

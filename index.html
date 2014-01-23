@@ -80,7 +80,11 @@ var cell = function() {
     this.y = 0;
     this.w = 0; // size
     this.h = 0;
-    this.data = []; // 8x8 bitmap
+    this.bg = new color();
+    this.bg.rr();
+    this.fg = new color();
+    this.fg.rr();
+    this.bm = new bitmap(8, 8); // []; // 8x8 bitmap
     this.gens = []; // 5x5 ikasu list 
     this.init = function() {
         // set data
@@ -93,6 +97,14 @@ var ikasu = function() {
     this.x0 = 0;
     this.y0 = 0;
 }
+// bitmap class
+var bitmap = function(nx,ny) {
+    this.nx = nx;
+    this.ny = ny;
+    this.data = [];
+    this.bg = new color();
+    this.bg.rr();
+}
 // render class
 // knows which layout cells need to be rendered
 var render = {
@@ -104,44 +116,48 @@ var render = {
             // margins
             var m0 = 4;
             var m1 = m0 * 2;
-            lay.list[i].con.fillStyle = c.rand(1.0);
+            var c0 = new color();
+            c0.rr(1.0);
+            lay.list[i].con.fillStyle = c0.cssr();
             lay.list[i].con.fillRect(m0, m0, lay.list[i].w - m1, lay.list[i].h - m1);
             // lay.list[i].con.fillRect(lay.list[i].x + m0, lay.list[i].y + m0, lay.list[i].w - m1, lay.list[i].h - m1);
         }
-        lay.beta.con.fillStyle = c.rand();
+        var c1 = new color();
+        c1.rr(0.6);
+        console.log(c1);
+        lay.beta.con.fillStyle = c1.cssr();
         lay.beta.con.fillRect(0,0,lay.beta.can.width,lay.beta.can.height);
         lay.beta.con.fillStyle = "rgba(255,255,255,1.0)";
         lay.beta.con.font = "128px Sans-Serif";
         lay.beta.con.fillText("B I T S T A R T E R", 200, 200);
     }
 }
-// color
-var c = {
-    "rand": function(a1) {
-        var a0 = a1 || Math.random();
-        var r0 = [c.rb(),c.rb(),c.rb(),a0];
+// color class
+var color = function() {
+    this.A = 0;
+    this.R = 0;
+    this.G = 0;
+    this.B = 0;
+    this.H = 0;
+    this.S = 0;
+    this.L = 0;
+    this.cssr = function() {
+        // css string
+        var r0 = [this.R,this.G,this.B,this.A];
         var s0 = r0.join(",");
         var s1 = "rgba(" + s0 + ")";
         return s1;
-    },
-    "rb": function() {
-        r0 = ((Math.random() * 255) >>> 0);
+    }
+    this.rb = function() {
+        var r0 = (Math.random() * 255) >>> 0;
         return r0;
-    },
-    "rgba": function() {
-        this.A = 0;
-        this.R = 0;
-        this.G = 0;
-        this.B = 0;
-        this.css = function() {
-            // css string
-        }
-    },
-    "randRgba": function(n0) {
-        // return collection of randomized c.struct, len n0
-        // generalized RGBA, HSLA classes
-        // with interfaces for random, math, etc
-    },
+    }
+    this.rr = function(a1) {
+        this.A = a1 || Math.random();
+        this.R = this.rb();
+        this.G = this.rb();
+        this.B = this.rb();
+    }
 }
         </script>
     </head>

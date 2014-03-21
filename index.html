@@ -57,7 +57,7 @@ var lay = {
             c0.can.style.left = c0.x + "px";
             c0.can.style.top = c0.y + "px";
             lay.list.push(c0);
-            // lay.alpha.appendChild(c0.can);
+            lay.alpha.appendChild(c0.can);
         }
         // lay.beta bitstarter 1st-third
         lay.beta = document.getElementById("beta");
@@ -137,7 +137,7 @@ var render = {
             c0.rr(1.0);
             lay.list[i].con.fillStyle = c0.cssr();
             lay.list[i].con.fillRect(m0, m0, lay.list[i].w - m1, lay.list[i].h - m1);
-            lay.list[i].con.fillRect(lay.list[i].x + m0, lay.list[i].y + m0, lay.list[i].w - m1, lay.list[i].h - m1);
+            // lay.list[i].con.fillRect(lay.list[i].x + m0, lay.list[i].y + m0, lay.list[i].w - m1, lay.list[i].h - m1);
         }
     },
     "drawStart": function() {

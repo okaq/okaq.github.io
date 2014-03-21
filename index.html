@@ -57,15 +57,15 @@ var lay = {
             c0.can.style.left = c0.x + "px";
             c0.can.style.top = c0.y + "px";
             lay.list.push(c0);
-            lay.alpha.appendChild(c0.can);
+            // lay.alpha.appendChild(c0.can);
         }
         // lay.beta bitstarter 1st-third
-        lay.beta = document.createElement("canvas");
+        lay.beta = document.getElementById("beta");
         lay.beta.can = lay.beta;
         lay.beta.con = lay.beta.can.getContext("2d");
-        lay.beta.width = g.width;
-        lay.beta.height = (g.height / 3) >>> 0;
-        lay.beta.style.zIndex = 1;
+        // lay.beta.width = g.width;
+        // lay.beta.height = (g.height / 3) >>> 0;
+        // lay.beta.style.zIndex = 1;
         lay.beta.style.position = "absolute";
         lay.beta.style.top = "0px";
         lay.beta.style.left = "0px";
@@ -101,9 +101,22 @@ var ikasu = function() {
 var bitmap = function(nx,ny) {
     this.nx = nx;
     this.ny = ny;
-    this.data = [];
+    this.data = []; // bit data class
     this.bg = new color();
     this.bg.rr();
+}
+// block class
+var block = function() {
+    this.x0 = 0;
+    this.y0 = 0;
+    this.w0 = 0;
+    this.h0 = 0;
+}
+// grid class
+var grid = function() {
+}
+// link class
+var link = function() {
 }
 // render class
 // knows which layout cells need to be rendered
@@ -112,6 +125,10 @@ var render = {
         render.scene = []; // from layout
     },
     "draw": function() {
+        // render.drawCells();
+        render.drawStart();
+    },
+    "drawCells": function() {
         for (var i = 0; i < g.tot; i++) {
             // margins
             var m0 = 4;
@@ -122,6 +139,9 @@ var render = {
             lay.list[i].con.fillRect(m0, m0, lay.list[i].w - m1, lay.list[i].h - m1);
             // lay.list[i].con.fillRect(lay.list[i].x + m0, lay.list[i].y + m0, lay.list[i].w - m1, lay.list[i].h - m1);
         }
+    },
+    "drawStart": function() {
+
         var c1 = new color();
         c1.rr(0.6);
         console.log(c1);
@@ -129,7 +149,7 @@ var render = {
         lay.beta.con.fillRect(0,0,lay.beta.can.width,lay.beta.can.height);
         lay.beta.con.fillStyle = "rgba(255,255,255,1.0)";
         lay.beta.con.font = "128px Sans-Serif";
-        lay.beta.con.fillText("B I T S T A R T E R", 200, 200);
+        // lay.beta.con.fillText("B I T S T A R T E R", 200, 200);
     }
 }
 // color class
@@ -159,9 +179,13 @@ var color = function() {
         this.B = this.rb();
     }
 }
+// coinbase api
+var cb = {
+}
         </script>
     </head>
     <body id="alpha">
+        <canvas id="beta" width="1920" height="420"></canvas>
         <!--
         <h1>okaq bitstarter</h1>
         <h2>nano games at peta scale</h2>

@@ -134,7 +134,8 @@ var render = {
             var m0 = 4;
             var m1 = m0 * 2;
             var c0 = new color();
-            c0.rr(1.0);
+            // c0.rr(1.0);
+            c0.mono(0.5);
             lay.list[i].con.fillStyle = c0.cssr();
             lay.list[i].con.fillRect(m0, m0, lay.list[i].w - m1, lay.list[i].h - m1);
             // lay.list[i].con.fillRect(lay.list[i].x + m0, lay.list[i].y + m0, lay.list[i].w - m1, lay.list[i].h - m1);
@@ -177,6 +178,11 @@ var color = function() {
         this.R = this.rb();
         this.G = this.rb();
         this.B = this.rb();
+    }
+    this.mono = function(a1) {
+        var m0 = this.rb();
+        this.A = a1 || Math.random();
+        this.R = this.G = this.B = m0;
     }
 }
 // coinbase api

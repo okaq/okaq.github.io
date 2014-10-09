@@ -1,4 +1,9 @@
-okaq.github.io
-==============
-nano games @ exa scale
---------------
+
+
+    The white chrysanthemum
+    Even when observed up close
+    Remains immaculate!
+
+                - Basho
+
+

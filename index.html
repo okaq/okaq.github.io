@@ -14,6 +14,46 @@
         <script type="text/javascript">
             // ok
         console.log("okaq github io ok!");
+        // data (tri-diagonal)
+        var data = {"Greyscales":6,"Grids":[0,1,2,1,1,1,1,1,1,0,1,2,1,1,1,1,2,1,0,1,2,1,1,1,1,2,1,0,1,2,1,1,1,1,2,1,0,1,2,1,1,1,1,2,1,0,1,2,1,1,1,1,2,1,0,1,1,1,1,1,1,2,1,0]};
+// async load
+(function() {
+ window.addEventListener("load", function(e) {g.init(e);}, false);
+ })();
+// game
+var g = {
+    "init": function(e) {
+        console.log(e);
+        d.init();
+    }
+}
+// dom
+var d = {
+    "init": function() {
+        d.alpha = document.getElementById("alpha");
+        console.log(d.alpha);
+    },
+    "canvas": function(w,h,x,y) {
+        var c0 = {};
+        c0.can = document.createElement("canvas");
+        c0.con = c0.can.getContext("2d");
+        // c0.mat = m.init(data.Grids)
+        // c0.theta = m.rt()
+    },
+    "add": function(c0) {
+        d.alpha.appendChild(c0.can);
+    }
+}
+// matrix
+var m = {
+    "init": function(d0) {
+        // data - rows & cols
+        // m0 = [[0,0,0,0],[1,1,1,1],...]
+    },
+    "rotate": function(t0) {
+        // theta - 0,pi/2,pi,3pi/2,2pi
+    }
+}
         </script>
     </head>
     <body id="alpha">

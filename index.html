@@ -25,6 +25,8 @@ var g = {
     "init": function(e) {
         console.log(e);
         d.init();
+        rgb.init();
+        r.render();
     }
 }
 // dom
@@ -37,12 +39,12 @@ var d = {
         d.w = 1920;
         d.h = 1080;
         // grid
-        d.nx = 1;
-        d.ny = 1;
+        d.nx = 8;
+        d.ny = 8;
         d.nt = (d.nx * d.ny) >>> 0;
         // margin
-        d.mx = 32;
-        d.my = 32;
+        d.mx = 16;
+        d.my = 16;
         // block
         d.bw = (d.w / d.nx) >>> 0;
         d.bh = (d.h / d.ny) >>> 0;
@@ -54,11 +56,11 @@ var d = {
         for (var i = 0; i < d.nt; i++) {
             var x0 = ((i % d.nx) * d.bw) >>> 0;
             var x1 = (x0 + d.mx) >>> 0;
-            var y0 = ((i / d.nx) * d.bh) >>> 0;
+            var y0 = (((i / d.nx) >>> 0) * d.bh) >>> 0;
             var y1 = (y0 + d.my) >>> 0;
             d.grid[i] = d.canvas(d.cw, d.ch, x1, y1);
+            d.add(d.grid[i]);
         }
-        r.render();
     },
     "canvas": function(w,h,x,y) {
         var c0 = {};
@@ -66,6 +68,12 @@ var d = {
         c0.con = c0.can.getContext("2d");
         // c0.mat = m.init(data.Grids)
         // c0.theta = m.rt()
+        c0.can.width = w;
+        c0.can.height = h;
+        c0.can.style.position = "absolute";
+        c0.can.style.left = x + "px";
+        c0.can.style.top = y + "px";
+        return c0;
     },
     "add": function(c0) {
         d.alpha.appendChild(c0.can);
@@ -84,6 +92,33 @@ var m = {
 // render
 var r = {
     "render": function() {
+        for (var i = 0; i < d.nt; i++) {
+            rgb.shuffle(1.0);
+            d.grid[i].con.fillStyle = rgb.css(rgb.rand); // "rgba(128,64,32,1.0)";
+            d.grid[i].con.fillRect(0,0,d.cw,d.ch);
+        }
+    }
+}
+// colors
+var rgb = {
+    "init": function() {
+        rgb.rand = [0,0,0,0];
+        rgb.shuffle(1.0);
+        rgb.red = [255,0,0,1.0];
+        rgb.yellow = [255,255,0,1.0];
+        rgb.green = [0,255,0,1.0];
+    },
+    "bytes": function() {
+        return (Math.random() * 255) >>> 0;
+    },
+    "shuffle": function(a0) {
+        for (var i = 0; i < 3; i++) {
+            rgb.rand[i] = rgb.bytes();
+        }
+        rgb.rand[3] = a0 || Math.random();
+    },
+    "css": function(a0) {
+        return "rgba(" + a0.join(",") + ")";
     }
 }
         </script>

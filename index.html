@@ -46,6 +46,10 @@ var d = {
         // block
         d.bw = (d.w / d.nx) >>> 0;
         d.bh = (d.h / d.ny) >>> 0;
+        // canvas
+        d.cw = (d.bw - (2 * d.mx)) >>> 0;
+        d.ch = (d.bh - (2 * d.my)) >>> 0;
+        console.log(d.cw, d.ch);
     },
     "canvas": function(w,h,x,y) {
         var c0 = {};

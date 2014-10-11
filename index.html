@@ -41,8 +41,8 @@ var d = {
         d.ny = 1;
         d.nt = (d.nx * d.ny) >>> 0;
         // margin
-        d.mx = 0;
-        d.my = 0;
+        d.mx = 32;
+        d.my = 32;
         // block
         d.bw = (d.w / d.nx) >>> 0;
         d.bh = (d.h / d.ny) >>> 0;
@@ -50,6 +50,15 @@ var d = {
         d.cw = (d.bw - (2 * d.mx)) >>> 0;
         d.ch = (d.bh - (2 * d.my)) >>> 0;
         console.log(d.cw, d.ch);
+        d.grid = [];
+        for (var i = 0; i < d.nt; i++) {
+            var x0 = ((i % d.nx) * d.bw) >>> 0;
+            var x1 = (x0 + d.mx) >>> 0;
+            var y0 = ((i / d.nx) * d.bh) >>> 0;
+            var y1 = (y0 + d.my) >>> 0;
+            d.grid[i] = d.canvas(d.cw, d.ch, x1, y1);
+        }
+        r.render();
     },
     "canvas": function(w,h,x,y) {
         var c0 = {};
@@ -70,6 +79,11 @@ var m = {
     },
     "rotate": function(t0) {
         // theta - 0,pi/2,pi,3pi/2,2pi
+    }
+}
+// render
+var r = {
+    "render": function() {
     }
 }
         </script>

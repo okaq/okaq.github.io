@@ -30,8 +30,22 @@ var g = {
 // dom
 var d = {
     "init": function() {
+        // alpha
         d.alpha = document.getElementById("alpha");
         console.log(d.alpha);
+        // dims
+        d.w = 1920;
+        d.h = 1080;
+        // grid
+        d.nx = 1;
+        d.ny = 1;
+        d.nt = (d.nx * d.ny) >>> 0;
+        // margin
+        d.mx = 0;
+        d.my = 0;
+        // block
+        d.bw = (d.w / d.nx) >>> 0;
+        d.bh = (d.h / d.ny) >>> 0;
     },
     "canvas": function(w,h,x,y) {
         var c0 = {};

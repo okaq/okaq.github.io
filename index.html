@@ -96,10 +96,40 @@ var m = {
         m0.gs = d0.Greyscales;
         m0.gd = d0.Grids;
         m0.s0 = s0;
+        m0.d0 = m.data(d0);
         return m0;
+    },
+    "data": function(d0) {
+        // stride
+        var s0 = Math.sqrt(d0.Grids.length);
+        var d0 = [];
+        for (var row = 0; row < s0; row++) {
+            var d1 = [];
+            for (var col = 0; col < s0; col++) {
+                var i0 = ((row * s0) + col) >>> 0;
+                d1[col] = d0.Grids[i0];
+            }
+            d0[row] = d1;
+        }
+        return d0;
+    },
+    "row": function(i0) {
+        // get row i0
+    },
+    "col": function(i0) {
+        // get col i0
+    },
+    "transpose": function(i0, i1) {
+        // write i0th row as i1th col
+    },
+    "reverse": function(i0) {
+        // reverse elements of i0th row
     },
     "rotate": function(t0) {
         // theta - 0,pi/2,pi,3pi/2,2pi
+        // pi/2 - row as cols, starting from back
+        // pi - revrese rows members, transpose from bottom up
+        // 3pi/2 - rows as cols, starting from front
     }
 }
 // render
@@ -151,7 +181,7 @@ var rgb = {
     "palette": function() {
         // generate palette
         rgb.pal = [];
-        var f0 = (255 / data.Greyscales) >>> 0;
+        var f0 = (255 / (data.Greyscales - 1)) >>> 0;
         for (var i = 0; i < data.Greyscales; i++) {
             var c0 = (i * f0) >>> 0;
             var c1 = [c0,c0,c0,0.50];

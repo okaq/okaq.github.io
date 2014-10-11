@@ -97,21 +97,22 @@ var m = {
         m0.gd = d0.Grids;
         m0.s0 = s0;
         m0.d0 = m.data(d0);
+        console.log(m0.d0);
         return m0;
     },
     "data": function(d0) {
         // stride
         var s0 = Math.sqrt(d0.Grids.length);
-        var d0 = [];
+        var d1 = [];
         for (var row = 0; row < s0; row++) {
-            var d1 = [];
+            var d2 = [];
             for (var col = 0; col < s0; col++) {
                 var i0 = ((row * s0) + col) >>> 0;
-                d1[col] = d0.Grids[i0];
+                d2[col] = d0.Grids[i0];
             }
-            d0[row] = d1;
+            d1[row] = d2;
         }
-        return d0;
+        return d1;
     },
     "row": function(i0) {
         // get row i0

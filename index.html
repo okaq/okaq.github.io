@@ -168,13 +168,26 @@ var m = {
             var d1 = m.zero(d0);
             // console.log(t0, d1);
             for (var row = 0; row < d0.length; row++) {
-                for (var col = 0; col < d0[row].length; col++) {
+                for (var col = d0[row].length - 1; col >= 0; col--) {
+                    // fill from end to front
+                    // var col0 = (d0[row].length - 1 - col) >>> 0;
+                    d1[col][row] = d0[row][col];
                 }
             }
+            return d1;
         }
         if (t0 == 2) {
         }
         if (t0 == 3) {
+            var d1 = m.zero(d0);
+            // console.log(t0, d1);
+            for (var row = 0; row < d0.length; row++) {
+                for (var col = 0; col < d0[row].length; col++) {
+                    // fill from front to last
+                    d1[col][row] = d0[row][col];
+                }
+            }
+            return d1;
         }
     }
 }

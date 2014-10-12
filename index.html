@@ -68,6 +68,7 @@ var d = {
         var c0 = {};
         c0.can = document.createElement("canvas");
         c0.con = c0.can.getContext("2d");
+        // not required that each canvas holds copy of data
         c0.mat = m.init(data);
         c0.mat.sx = (w / c0.mat.s0) >>> 0;
         c0.mat.sy = (h / c0.mat.s0) >>> 0;
@@ -98,6 +99,16 @@ var m = {
         m0.s0 = s0;
         m0.d0 = m.data(d0);
         console.log(m0.d0);
+        var f0 = Math.random();
+        var t0 = 0;
+        if (f0 >= 0.25 && f0 < 0.5) {
+            t0 = 1;
+        } else if (f0 >= 0.5 && f0 < 0.75) {
+            t0 = 2;
+        } else if (f0 >= 0.75) {
+            t0 = 3;
+        }
+        m0.d0 = m.rotate(t0, m0.d0);
         return m0;
     },
     "data": function(d0) {
@@ -126,11 +137,14 @@ var m = {
     "reverse": function(i0) {
         // reverse elements of i0th row
     },
-    "rotate": function(t0) {
+    "rotate": function(t0, d0) {
         // theta - 0,pi/2,pi,3pi/2,2pi
         // pi/2 - row as cols, starting from back
         // pi - revrese rows members, transpose from bottom up
         // 3pi/2 - rows as cols, starting from front
+        if (t0 == 0) {
+            return d0;
+        }
     }
 }
 // render
@@ -154,6 +168,11 @@ var r = {
                 }
             }
         }
+    },
+    "bkgd": function() {
+        // generalized render functions
+        // input: canvas, data
+        // output: draw calls
     }
 }
 // colors

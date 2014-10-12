@@ -24,9 +24,15 @@
 var g = {
     "init": function(e) {
         console.log(e);
+        var now = window.performance.now();
+        g.tot = [0,0,0,0];
         d.init();
         rgb.init();
         r.render();
+        console.log(g.tot);
+        var end = window.performance.now();
+        var delta = end - now;
+        console.log("total running time: " + delta + "ms");
     }
 }
 // dom
@@ -43,8 +49,8 @@ var d = {
         d.ny = 9;
         d.nt = (d.nx * d.ny) >>> 0;
         // margin
-        d.mx = 16;
-        d.my = 16;
+        d.mx = 2;
+        d.my = 2;
         // block
         d.bw = (d.w / d.nx) >>> 0;
         d.bh = (d.h / d.ny) >>> 0;
@@ -108,7 +114,8 @@ var m = {
         } else if (f0 >= 0.75) {
             t0 = 3;
         }
-        m0.d0 = m.rotate(t0, m0.d0);
+        m0.d1 = m.rotate(t0, m0.d0);
+        // console.log(t0, m0.d1);
         return m0;
     },
     "data": function(d0) {
@@ -161,6 +168,7 @@ var m = {
         // pi/2 - row as cols, starting from back
         // pi - reverse rows members, transpose from bottom up
         // 3pi/2 - rows as cols, starting from front
+        g.tot[t0] = g.tot[t0] + 1;
         if (t0 == 0) {
             return d0;
         }
@@ -170,13 +178,21 @@ var m = {
             for (var row = 0; row < d0.length; row++) {
                 for (var col = d0[row].length - 1; col >= 0; col--) {
                     // fill from end to front
-                    // var col0 = (d0[row].length - 1 - col) >>> 0;
-                    d1[col][row] = d0[row][col];
+                    var col0 = (d0[row].length - 1 - col) >>> 0;
+                    d1[col0][row] = d0[row][col];
                 }
             }
+            // console.log(d1);
             return d1;
         }
         if (t0 == 2) {
+            var d1 = [];
+            for (var row = 0; row < d0.length; row++) {
+                var row0 = (d0.length - 1 - row) >>> 0;
+                var d2 = m.reverse(d0[row]);
+                d1[row0] = d2;
+            }
+            return d1;
         }
         if (t0 == 3) {
             var d1 = m.zero(d0);
@@ -184,7 +200,8 @@ var m = {
             for (var row = 0; row < d0.length; row++) {
                 for (var col = 0; col < d0[row].length; col++) {
                     // fill from front to last
-                    d1[col][row] = d0[row][col];
+                    var col0 = (d0[row].length - 1 - col) >>> 0;
+                    d1[col0][row] = d0[row][col];
                 }
             }
             return d1;
@@ -201,13 +218,17 @@ var r = {
             for (var y = 0; y < d.grid[i].mat.s0; y++) {
                 for (var x = 0; x < d.grid[i].mat.s0; x++) {
                     var m0 = 2; // margin
+                    // pwoer of two, leaves some right margin space unfilled
+                    // requires exact pixel separation distances
                     var i0 = ((y * d.grid[i].mat.s0) >>> 0) + x;
                     var i1 = d.grid[i].mat.gd[i0];
+                    var i2 = d.grid[i].mat.d1[y][x];
                     var x0 = ((x * d.grid[i].mat.sx) + m0) >>> 0;
                     var y0 = ((y * d.grid[i].mat.sy) + m0) >>> 0;
                     var s0 = (d.grid[i].mat.sx - (2 * m0)) >>> 0;
                     // console.log(x0,y0,s0);
-                    d.grid[i].con.fillStyle = rgb.css(rgb.pal[i1]);
+                    // d.grid[i].con.fillStyle = rgb.css(rgb.pal[i1]);
+                    d.grid[i].con.fillStyle = rgb.css(rgb.pal[i2]);
                     d.grid[i].con.fillRect(x0, y0, s0, s0);
                 }
             }
@@ -248,7 +269,7 @@ var rgb = {
         var f0 = (255 / (data.Greyscales - 1)) >>> 0;
         for (var i = 0; i < data.Greyscales; i++) {
             var c0 = (i * f0) >>> 0;
-            var c1 = [c0,c0,c0,0.50];
+            var c1 = [c0,c0,c0,1.0];
             rgb.pal[i] = c1;
         }
     }

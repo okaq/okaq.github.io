@@ -49,8 +49,8 @@ var d = {
         d.ny = 9;
         d.nt = (d.nx * d.ny) >>> 0;
         // margin
-        d.mx = 2;
-        d.my = 2;
+        d.mx = 0;
+        d.my = 0;
         // block
         d.bw = (d.w / d.nx) >>> 0;
         d.bh = (d.h / d.ny) >>> 0;
@@ -212,24 +212,27 @@ var m = {
 var r = {
     "render": function() {
         for (var i = 0; i < d.nt; i++) {
-            rgb.shuffle(1.0);
+            // rgb.shuffle(1.0);
             d.grid[i].con.fillStyle = rgb.css(rgb.rand); // "rgba(128,64,32,1.0)";
             d.grid[i].con.fillRect(0,0,d.cw,d.ch);
             for (var y = 0; y < d.grid[i].mat.s0; y++) {
                 for (var x = 0; x < d.grid[i].mat.s0; x++) {
-                    var m0 = 2; // margin
-                    // pwoer of two, leaves some right margin space unfilled
+                    var m0 = 1; // margin
+                    // power of two, leaves some right margin space unfilled
                     // requires exact pixel separation distances
                     var i0 = ((y * d.grid[i].mat.s0) >>> 0) + x;
                     var i1 = d.grid[i].mat.gd[i0];
                     var i2 = d.grid[i].mat.d1[y][x];
-                    var x0 = ((x * d.grid[i].mat.sx) + m0) >>> 0;
-                    var y0 = ((y * d.grid[i].mat.sy) + m0) >>> 0;
-                    var s0 = (d.grid[i].mat.sx - (2 * m0)) >>> 0;
+                    var x0 = (x * d.grid[i].mat.sx) >>> 0;
+                    var x1 = (x0 + m0) >>> 0;
+                    var y0 = (y * d.grid[i].mat.sy) >>> 0;
+                    var y1 = (y0 + m0) >>> 0;
+                    var sx = (d.grid[i].mat.sx - (2 * m0)) >>> 0;
+                    var sy = (d.grid[i].mat.sy - (2 * m0)) >>> 0;
                     // console.log(x0,y0,s0);
                     // d.grid[i].con.fillStyle = rgb.css(rgb.pal[i1]);
                     d.grid[i].con.fillStyle = rgb.css(rgb.pal[i2]);
-                    d.grid[i].con.fillRect(x0, y0, s0, s0);
+                    d.grid[i].con.fillRect(x1, y1, sx, sy);
                 }
             }
         }
@@ -244,7 +247,7 @@ var r = {
 var rgb = {
     "init": function() {
         rgb.rand = [0,0,0,0];
-        rgb.shuffle(1.0);
+        rgb.shuffle(0.55);
         rgb.red = [255,0,0,1.0];
         rgb.yellow = [255,255,0,1.0];
         rgb.green = [0,255,0,1.0];
@@ -269,7 +272,7 @@ var rgb = {
         var f0 = (255 / (data.Greyscales - 1)) >>> 0;
         for (var i = 0; i < data.Greyscales; i++) {
             var c0 = (i * f0) >>> 0;
-            var c1 = [c0,c0,c0,1.0];
+            var c1 = [c0,c0,c0,0.90];
             rgb.pal[i] = c1;
         }
     }

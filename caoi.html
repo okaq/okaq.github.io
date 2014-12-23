@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head id="zeta">
+        <title>okaq</title>
+        <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+        <meta name="viewport" content="width=1920,height=1080,initial-scale=1" />
+        <meta name="source" content="https://github.com/okaq/okaq.gira" />
+        <meta name="creator" content="AQ <aq@okaq.com>" />
+        <meta name="date" content="2014-12-22" />
+        <link rel="shortcut icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAIAAAD8GO2jAAAAMklEQVR4nGIR+b+KgZaAiaamj1owasGoBaMWjFowasGoBaMWjFowasGoBVQEgAAAAP//xVoCAPYmVTkAAAAASUVORK5CYII=" />
+         <style type="text/css">
+            html,body{width:1920px;height:1080px;margin:0px;border:0px;padding:0px;background-color:rgba(255,255,255,1.0);}
+        </style>
+        <script src="/hana"></script>
+         <script type="text/javascript">
+            // ok
+        console.log("okaq joruri waka go!");
+        // async load
+        (function(){window.addEventListener("load",function(e){w.init(e);},false);})();
+        // waka
+        var w = {
+            "init": function(e) {
+                console.log(e);
+                var t0 = window.performance.now();
+
+                // console.log(hana[0]);
+                // console.log(base64DecToArr(hana[0]));
+                // console.log(base64DecToArr(hana[0]).buffer);
+                // stopwatch - time each decode and render in an animation frame
+                // generate total and average stats for document
+                w.stop = [];
+
+                // global layout dimensions
+                w.w = 1920; // page width
+                w.h = 1080;
+                w.cw = 64; // bmp cell count
+                w.ch = 64;
+                w.sx = 4; // bmp cell size in pixels
+                w.sy = 4;
+                w.sw = (w.cw * w.sx) >>> 0; // block size
+                w.sh = (w.ch * w.sy) >>> 0;
+                w.nx = (w.w / w.sw) >>> 0; // blocks per page
+                w.ny = (w.h / w.sh) >>> 0;
+                w.nt = (w.nx * w.ny) >>> 0;
+                // console.log(w.sw, w.sh, w.nx, w.ny, w.nt); // 256x256, 7x4
+                w.db = {};
+                // console.log(binStr(255), binStr(1), binStr(127));
+
+                for (var i = 0; i < w.nt; i++) {
+                    w.hana(i);
+                }
+
+                // console.log(w.db);
+                w.stats();
+                // ren.test();
+
+                // stats: 
+                // total run time: 333ms 
+                // bmp decode and render: 10ms for 512x512 image 
+
+                var t1 = window.performance.now() - t0;
+                console.log("total running time: " + t1 + " ms");
+            },
+            "hana": function(n0) {
+                w.n0 = n0;
+                // start timer
+                w.begin = window.performance.now();
+                w.grid();
+            },
+            "grid": function() {
+                // create and add dom canvas object
+                w.x0 = w.n0 % w.nx;
+                w.y0 = (w.n0 / w.nx) >>> 0;
+                w.x1 = (w.x0 * w.sw) >>> 0;
+                w.y1 = (w.y0 * w.sh) >>> 0;
+                w.c0 = dom.canvas([w.sw, w.sh, w.x1, w.y1]);
+                w.id = "grid_" + w.n0;
+                w.c0.can.dataset.id = w.id;
+                w.db[w.id] = w.c0;
+                dom.add(w.c0);
+                w.bmp();
+            },
+            "bmp": function() {
+                // decode random hana bmp data from base64 string
+                // cache
+                w.bloom = (Math.random() * hana.length) >>> 0; // index into hana
+                w.bud = hana[w.bloom]; // base64 string
+                w.petal = base64DecToArr(w.bud); // decoded uint8array
+                // console.log(w.bloom, w.petal);
+                w.pid = "hana_" + w.bloom;
+                if (w.db[w.pid]) {
+                    w.stamen = w.db[w.pid];
+                } else {
+                    w.stamen = w.expand(w.petal);
+                    w.db[w.pid] = w.stamen.slice(0);
+                }
+                // console.log(w.stamen);
+                ren.hana();
+                // gen palette and render bmp in canvas
+                w.time();
+            },
+            "expand": function(b0) {
+                // byte array to bit array
+                var r0 = [];
+                for (var i = 0; i < b0.length; i++) {
+                    var b1 = b0[i];
+                    // var s0 = b1.toString(2);
+                    // var s1 = "";
+                    var s0 = binStr(b1);
+                    for (var j = 0; j < 8; j++) {
+                        var s1 = s0.charAt(j);
+                        var n0 = parseInt(s1, 10);
+                        r0.push(n0);
+                        // console.log(s0, s1, n0, r0);
+                    }
+                }
+                return r0;
+            },
+            "time": function() {
+                // record time
+                w.end = window.performance.now();
+                w.delta = w.end - w.begin;
+                w.stop.push(w.delta);
+            },
+            "stats": function() {
+                w.sum = 0;
+                w.avg = 0;
+                for (var i = 0; i < w.stop.length; i++) {
+                    w.sum += w.stop[i];
+                }
+                w.avg = (w.sum / w.stop.length);
+                console.log("stats: " + w.sum + " " + w.avg);
+            }
+        }
+// dom 
+var dom = {
+    "canvas": function(r0) {
+        var c0 = {};
+        c0.can = document.createElement("canvas");
+        c0.con = c0.can.getContext("2d");
+        c0.can.width = r0[0];
+        c0.can.height = r0[1];
+        c0.can.style.position = "absolute";
+        c0.can.style.top = r0[3] + "px";
+        c0.can.style.left = r0[2] + "px";
+        return c0;
+    },
+    "add": function(c0) {
+        if (!dom.alpha) {
+            dom.alpha = document.getElementById("alpha");
+        }
+        dom.alpha.appendChild(c0.can);
+    }
+}
+// render
+var ren = {
+    "test": function() {
+        for (var i = 0; i < w.nt; i++) {
+            var k0 = "grid_" + i;
+            var c0 = w.db[k0];
+            c0.con.fillStyle = rgb.rc();
+            c0.con.fillRect(0,0,c0.can.width,c0.can.height);
+        }
+    },
+    "hana": function() {
+        // render w.stamen in w.c0
+        var rgb0 = rgb.rc();
+        var rgb1 = rgb.rc();
+        for (var i = 0; i < w.stamen.length; i++) {
+            var x0 = i % w.cw;
+            var y0 = (i / w.cw) >>> 0;
+            var x1 = (x0 * w.sx) >>> 0;
+            var y1 = (y0 * w.sy) >>> 0;
+            if (w.stamen[i] == 0) {
+                w.c0.con.fillStyle = rgb0;
+            } else {
+                w.c0.con.fillStyle = rgb1;
+            }
+            w.c0.con.fillRect(x1, y1, w.sx, w.sy);
+        }
+    }
+}
+// colors
+var rgb = {
+    "rand": function() {
+        return [rgb.rb(),rgb.rb(),rgb.rb(),1.0];
+    },
+    "rb": function() {
+        return (Math.random() * 255) >>> 0;
+    },
+    "css": function(c0) {
+        var s0 = "rgba(";
+        s0 += c0.join(",");
+        s0 += ")";
+        return s0;
+    },
+    "rc": function() {
+        return rgb.css(rgb.rand());
+    },
+    "comp": function(rgb0, rgb1) {
+        for (var i = 0; i < rgb0.length; i++) {
+            if (rgb0[i] != rgb1[i]) {
+                return false;
+            }
+        }
+        return true;
+    }
+}
+// matrix
+var m = {
+    // get/set row/col
+    // reverse row/col
+    // transpose
+    // rotate (pi/2)
+}
+// string view
+/*\
+  |*|
+  |*|  Base64 / binary data / UTF-8 strings utilities
+  |*|
+  |*|  https://developer.mozilla.org/en-US/docs/Web/JavaScript/Base64_encoding_and_decoding
+  |*|
+  \*/
+
+/* Array of bytes to base64 string decoding */
+
+function b64ToUint6 (nChr) {
+      return nChr > 64 && nChr < 91 ?
+          nChr - 65
+        : nChr > 96 && nChr < 123 ?
+          nChr - 71
+        : nChr > 47 && nChr < 58 ?
+          nChr + 4
+        : nChr === 43 ?
+          62
+        : nChr === 47 ?
+          63
+        :
+          0;
+}
+
+function base64DecToArr (sBase64, nBlocksSize) {
+      var sB64Enc = sBase64.replace(/[^A-Za-z0-9\+\/]/g, ""), nInLen = sB64Enc.length,
+          nOutLen = nBlocksSize ? Math.ceil((nInLen * 3 + 1 >> 2) / nBlocksSize) * nBlocksSize : nInLen * 3 + 1 >> 2, 
+          taBytes = new Uint8Array(nOutLen);
+
+        for (var nMod3, nMod4, nUint24 = 0, nOutIdx = 0, nInIdx = 0; nInIdx < nInLen; nInIdx++) {
+            nMod4 = nInIdx & 3;
+            nUint24 |= b64ToUint6(sB64Enc.charCodeAt(nInIdx)) << 18 - 6 * nMod4;
+            if (nMod4 === 3 || nInLen - nInIdx === 1) {
+                for (nMod3 = 0; nMod3 < 3 && nOutIdx < nOutLen; nMod3++, nOutIdx++) {
+                    taBytes[nOutIdx] = nUint24 >>> (16 >>> nMod3 & 24) & 255;
+                }
+                nUint24 = 0;
+            }
+        }
+        return taBytes;
+}
+// bitwise ops
+// https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Operators/Bitwise_Operators
+var binStr = function(nMask) {
+     // nMask must be between 0 and 255
+     for (var nFlag = 0, nShifted = nMask, sMask = ""; nFlag < 32;
+         nFlag++, sMask += String(nShifted >>> 31), nShifted <<= 1);
+     return sMask.slice(24);
+}
+    </script>
+</head>
+<body id="alpha">
+</body>
+</html>
+
+
+
+ 
+

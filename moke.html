@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head id="zeta">
+        <title>okaq</title>
+        <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+        <meta name="viewport" content="width=1920,height=1080,initial-scale=1" />
+        <meta name="source" content="https://gihub.com/okaq/okaq.github.io" />
+        <meta name="creator" content="AQ <aq@okaq.com>" />
+        <meta name="date" content="2014-10-14" />
+        <link rel="shortcut icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAIAAAD8GO2jAAAAMklEQVR4nGL5H9nDQEvARFPTRy0YtWDUglELRi0YtWDUglELRi0YtWDUAioCQAAAAP//nxMCJyiFuqAAAAAASUVORK5CYII=" />
+        <style type="text/css">
+            html,body{width:1920px;height:1080px;margin:0px;border:0px;padding:0px;background-color:rgba(255,255,255,1.0);}
+        </style>
+        <script type="text/javascript">
+            // ok
+        console.log("okaq github io ok!");
+        // async load
+        (function() {
+         window.addEventListener("load", function(e){g.init(e);}, false);
+         })();
+// game
+var g = {
+    "init": function(e) {
+        console.log(e);
+        rgb.init();
+        d.init();
+        r.render();
+        r.char("0");
+    }
+}
+// dom
+var d = {
+    "init": function() {
+        console.log("dom init...");
+        // body
+        d.alpha = document.getElementById("alpha");
+        // dims
+        d.w = 1920;
+        d.h = 1080;
+        // char
+        d.cw = 512+256;
+        d.ch = 512+256;
+        // margins
+        d.cx = ((d.w - d.cw) / 2) >>> 0;
+        d.cy = ((d.h - d.ch) / 2) >>> 0;
+        d.beta = d.canvas(d.cx,d.cy,d.cw,d.ch);
+        d.add(d.beta);
+    },
+    "canvas": function(x,y,w,h) {
+        var c0 = {};
+        c0.can = document.createElement("canvas");
+        c0.con = c0.can.getContext("2d");
+        c0.can.width = w;
+        c0.can.height = h;
+        c0.can.style.position = "absolute";
+        c0.can.style.left = x + "px";
+        c0.can.style.top = y + "px";
+        return c0;
+    },
+    "add": function(c0) {
+        d.alpha.appendChild(c0.can);
+    }
+}
+// render
+var r = {
+    "render": function() {
+        r.bkgd();
+    },
+    "bkgd": function() {
+        rgb.shuffle(1.0);
+        d.beta.con.fillStyle = rgb.css(rgb.rand);
+        d.beta.con.fillRect(0,0,d.cw,d.ch);
+    },
+    "char": function(c0) {
+        // fore
+        rgb.shuffle(1.0);
+        d.beta.con.fillStyle = rgb.css(rgb.rand);
+        // text
+        d.beta.con.font = "700px Ubuntu, Arial, Helvetica";
+        d.beta.con.textBaseline = "top";
+        d.beta.con.fillText(c0, 128, 0);
+        r.test();
+        r.data();
+    },
+    "test": function() {
+        // uni test
+        var s0 = "uni test: ";
+        for (var i = 0; i < 32; i++) {
+            s0 += uni.rand(64,500);
+        }
+        console.log(s0);
+    },
+    "data": function() {
+        d.beta.img = d.beta.con.getImageData(0,0,d.cw,d.ch);
+        d.beta.data = d.beta.img.data;
+        console.log(d.beta.data[128]);
+    }
+}
+// colors
+var rgb = {
+    "init": function() {
+        rgb.rand = [0,0,0,0];
+        rgb.shuffle(1.0);
+        console.log("rgb.rand: ", rgb.rand);
+        rgb.red = [255,0,0,1.0];
+        rgb.yellow = [255,255,0,1.0];
+        rgb.green = [0,255,0,1.0];
+
+        // rgb.palette();
+    },
+    "bytes": function() {
+        return (Math.random() * 255) >>> 0;
+    },
+    "shuffle": function(a0) {
+        for (var i = 0; i < 3; i++) {
+            rgb.rand[i] = rgb.bytes();
+        }
+        rgb.rand[3] = a0 || Math.random();
+    },
+    "css": function(a0) {
+        return "rgba(" + a0.join(",") + ")";
+    },
+    "palette": function() {
+        // generate palette
+        rgb.pal = [];
+        var f0 = (255 / (data.Greyscales - 1)) >>> 0;
+        for (var i = 0; i < data.Greyscales; i++) {
+            var c0 = (i * f0) >>> 0;
+            var c1 = [c0,c0,c0,0.90];
+            rgb.pal[i] = c1;
+        }
+    }
+}
+// unicode
+var uni = {
+    "rand": function(lo, hi) {
+        // unicode code points
+        var d0 = (hi - lo) >>> 0;
+        var d1 = ((Math.random() * d0) + lo) >>> 0;
+        return String.fromCharCode(d1);
+    }
+}
+        </script> 
+    </head>
+    <body id="alpha">
+    </body>
+</html>

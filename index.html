@@ -67,11 +67,11 @@
                 w.db = {};
 
                 for (var i = 0; i < w.mo.length; i++) {
-                    var s0 = "kk_";
-                    s0 += w.mo[i];
-                    s0 += "_";
                     for (var j = 0; j < 4; j++) {
-                        var s1 = j.toString();
+                        var s0 = "kk_";
+                        s0 += w.mo[i];
+                        s0 += "_";
+                        var s1 = j.toString(10);
                         s0 += s1;
                         w.hana(s0, i);
                     }

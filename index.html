@@ -83,7 +83,7 @@
             "bmp": function() {
                 // decode random hana bmp data from base64 string
                 // cache
-                w.bloom = (Math.random() * hana.length) >>> 0; // index into hana
+                w.bloom = (Math.random() * hana2.length) >>> 0; // index into hana
                 w.bud = hana2[w.bloom]; // base64 string
                 w.petal = base64DecToArr(w.bud); // decoded uint8array
                 // console.log(w.bloom, w.petal);

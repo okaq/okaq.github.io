@@ -32,8 +32,8 @@
                 w.h = 1080;
                 w.w2 = (w.w / 2) >>> 0;
                 w.h2 = (w.h / 2) >>> 0;
-                w.px = 1; // bmp cell size
-                w.py = 1;
+                w.px = 2; // bmp cell size
+                w.py = 2;
                 w.bx = 64; 
                 w.by = 64;
                 w.dx = (w.px * w.bx) >>> 0; // canvas dims
@@ -73,7 +73,8 @@
                         s0 += "_";
                         var s1 = j.toString(10);
                         s0 += s1;
-                        w.hana(s0, i);
+                        var i0 = (i * j) >>> 0;
+                        w.hana(s0, i0);
                     }
                 }
 
@@ -106,7 +107,7 @@
             "bmp": function() {
                 // decode
                 w.bloom = hana2d[w.n0];
-                console.log(w.n0, w.bloom);
+                // console.log(w.n0, w.bloom);
                 w.petal = base64DecToArr(w.bloom);
                 w.stamen = w.expand(w.petal);
                 ren.hana();

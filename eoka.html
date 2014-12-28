@@ -32,12 +32,12 @@
                 w.h = 1080;
                 w.w2 = (w.w / 2) >>> 0;
                 w.h2 = (w.h / 2) >>> 0;
-                w.px = 2; // bmp cell size
-                w.py = 2;
+                w.ex = 1; // bmp cell size
+                w.ey = 1;
                 w.bx = 64; 
                 w.by = 64;
-                w.dx = (w.px * w.bx) >>> 0; // canvas dims
-                w.dy = (w.py * w.by) >>> 0;
+                w.dx = (w.ex * w.bx) >>> 0; // canvas dims
+                w.dy = (w.ey * w.by) >>> 0;
                 w.mx = 1; // margin
                 w.my = 1;
                 w.cx = (w.dx + (2 * w.mx)) >>> 0; // cell dims with margin
@@ -48,6 +48,7 @@
                 w.ty = (w.cy * w.ny) >>> 0;
                 w.pmx = ((w.w - w.tx) / 2) >>> 0; // page margin
                 w.pmy = ((w.h - w.ty) / 2) >>> 0;
+                console.log(w);
 
                 // data
                 w.mo = [
@@ -180,14 +181,14 @@ var ren = {
         for (var i = 0; i < w.stamen.length; i++) {
             var x0 = i % w.bx;
             var y0 = (i / w.bx) >>> 0;
-            var x1 = (x0 * w.px) >>> 0;
-            var y1 = (y0 * w.py) >>> 0;
+            var x1 = (x0 * w.ex) >>> 0;
+            var y1 = (y0 * w.ey) >>> 0;
             if (w.stamen[i] == 0) {
                 w.c0.con.fillStyle = rgb0;
             } else {
                 w.c0.con.fillStyle = rgb1;
             }
-            w.c0.con.fillRect(x1, y1, w.px, w.py);
+            w.c0.con.fillRect(x1, y1, w.ex, w.ey);
         }
     }
 }

@@ -177,16 +177,16 @@ var ren = {
         var rgb0 = rgb.rc();
         var rgb1 = rgb.rc();
         for (var i = 0; i < w.stamen.length; i++) {
-            var x0 = i % w.cw;
-            var y0 = (i / w.cw) >>> 0;
-            var x1 = (x0 * w.sx) >>> 0;
-            var y1 = (y0 * w.sy) >>> 0;
+            var x0 = i % w.bx;
+            var y0 = (i / w.bx) >>> 0;
+            var x1 = (x0 * w.px) >>> 0;
+            var y1 = (y0 * w.py) >>> 0;
             if (w.stamen[i] == 0) {
                 w.c0.con.fillStyle = rgb0;
             } else {
                 w.c0.con.fillStyle = rgb1;
             }
-            w.c0.con.fillRect(x1, y1, w.sx, w.sy);
+            w.c0.con.fillRect(x1, y1, w.px, w.py);
         }
     }
 }

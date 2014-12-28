@@ -105,6 +105,7 @@
             "bmp": function() {
                 // decode
                 w.bloom = hana2d[w.n0];
+                console.log(w.n0, w.bloom);
                 w.petal = base64DecToArr(w.bloom);
                 w.stamen = w.expand(w.petal);
                 ren.hana();

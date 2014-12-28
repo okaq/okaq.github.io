@@ -94,8 +94,8 @@
                 w.y0 = (w.i0 / w.nx) >>> 0;
                 w.x1 = (w.x0 * w.cx) >>> 0;
                 w.y1 = (w.y0 * w.cy) >>> 0;
-                w.x2 = (w.x1 + w.mx) >>> 0;
-                w.y2 = (w.y1 + w.my) >>> 0;
+                w.x2 = (w.x1 + w.mx + w.pmx) >>> 0;
+                w.y2 = (w.y1 + w.my + w.pmy) >>> 0;
                 w.c0 = dom.canvas([w.dx, w.dy, w.x2, w.y2]);
                 w.c0.can.dataset.id = w.n0;
                 w.db[w.n0] = w.c0;

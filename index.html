@@ -38,8 +38,8 @@
                 w.by = 64;
                 w.dx = (w.ex * w.bx) >>> 0; // canvas dims
                 w.dy = (w.ey * w.by) >>> 0;
-                w.mx = 1; // margin
-                w.my = 1;
+                w.mx = 4; // margin
+                w.my = 4;
                 w.cx = (w.dx + (2 * w.mx)) >>> 0; // cell dims with margin
                 w.cy = (w.dy + (2 * w.my)) >>> 0;
                 w.nx = 4; // grid dims
@@ -48,7 +48,6 @@
                 w.ty = (w.cy * w.ny) >>> 0;
                 w.pmx = ((w.w - w.tx) / 2) >>> 0; // page margin
                 w.pmy = ((w.h - w.ty) / 2) >>> 0;
-                console.log(w);
 
                 // data
                 w.mo = [
@@ -68,14 +67,14 @@
                 w.db = {};
 
                 for (var i = 0; i < w.mo.length; i++) {
+                    w.s0 = "kk_";
+                    w.s0 += w.mo[i];
+                    w.db[w.s0] = {};
+                    w.rgb();
                     for (var j = 0; j < 4; j++) {
-                        var s0 = "kk_";
-                        s0 += w.mo[i];
-                        s0 += "_";
-                        var s1 = j.toString(10);
-                        s0 += s1;
-                        var i0 = (i * j) >>> 0;
-                        w.hana(s0, i0);
+                        w.i0 = (i * w.nx + j) >>> 0;
+                        w.n0 = w.s0 + "_" + j.toString(10);
+                        w.hana();
                     }
                 }
 
@@ -84,9 +83,7 @@
                 var t1 = window.performance.now() - t0;
                 console.log("total running time: " + t1 + " ms");
             },
-            "hana": function(n0, i0) {
-                w.n0 = n0;
-                w.i0 = i0;
+            "hana": function() {
                 // start timer
                 w.begin = window.performance.now();
                 w.grid();
@@ -99,11 +96,18 @@
                 w.y1 = (w.y0 * w.cy) >>> 0;
                 w.x2 = (w.x1 + w.mx + w.pmx) >>> 0;
                 w.y2 = (w.y1 + w.my + w.pmy) >>> 0;
+                // console.log(w);
                 w.c0 = dom.canvas([w.dx, w.dy, w.x2, w.y2]);
                 w.c0.can.dataset.id = w.n0;
                 w.db[w.n0] = w.c0;
                 dom.add(w.c0);
                 w.bmp();
+            },
+            "rgb": function() {
+                // color
+                w.db[w.s0].rgb = {};
+                w.db[w.s0].rgb.fore = rgb.rc();
+                w.db[w.s0].rgb.bkgd = rgb.rc();
             },
             "bmp": function() {
                 // decode
@@ -176,8 +180,8 @@ var ren = {
     },
     "hana": function() {
         // render w.stamen in w.c0
-        var rgb0 = rgb.rc();
-        var rgb1 = rgb.rc();
+        var rgb0 = w.db[w.s0].rgb.bkgd; // rgb.rc();
+        var rgb1 = w.db[w.s0].rgb.fore; // rgb.rc();
         for (var i = 0; i < w.stamen.length; i++) {
             var x0 = i % w.bx;
             var y0 = (i / w.bx) >>> 0;

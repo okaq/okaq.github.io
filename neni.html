@@ -164,15 +164,15 @@
 var mj = {
     "init": function() {
         // layout
-        mj.w0 = 256; // bmp size
-        mj.h0 = 256;
-        mj.nx = 3; // bmp count
-        mj.ny = 3;
+        mj.w0 = 128; // bmp size
+        mj.h0 = 128;
+        mj.nx = 6; // bmp count
+        mj.ny = 6;
         mj.nt = (mj.nx * mj.ny) >>> 0;
         mj.w1 = (mj.nx * mj.w0) >>> 0;
         mj.h1 = (mj.ny * mj.h0) >>> 0;
         mj.mx = ((w.w2 - mj.w1) / 2) >>> 0; // margins
-        mj.my = ((w.h2 - mj.h1) / 2) >>> 0;
+        mj.my = ((w.h - mj.h1) / 2) >>> 0;
         // data
         mj.nt = 41; // tile count
         mj.k0 = [];
@@ -186,9 +186,22 @@ var mj = {
                 var i0 = (y0 * mj.nx + x0) >>> 0;
                 var i1 = (Math.random() * mj.nt) >>> 0;
                 mj.k0[i0] = "mj_" + i1.toString();
+                mj.db[mj.k0[i0]] = dom.canvas([mj.w0, mj.h0, x2, y2]);
+                dom.add(mj.db[mj.k0[i0]]);
             }
         }
-        console.log(mj.k0);
+        // console.log(mj.k0);
+        // console.log(mj.db);
+        mj.bmp();
+    },
+    "bmp": function() {
+        for (var i = 0; i < mj.k0.length; i++) {
+            var k1 = mj.k0[i];
+            mj.db[k1].bloom = mj2[k1];
+            mj.db[k1].petal = base64DecToArr(mj.db[k1].bloom);
+            mj.db[k1].stamen = w.expand(mj.db[k1].petal);
+        }
+        console.log(mj.db);
     }
 }
 // words

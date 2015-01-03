@@ -39,6 +39,8 @@
                 w.h = 1080;
                 w.w2 = (w.w / 2) >>> 0;
                 w.h2 = (w.h / 2) >>> 0;
+
+                mj.init();
                 w.ex = 1; // bmp cell size
                 w.ey = 1;
                 w.bx = 64; 
@@ -55,6 +57,7 @@
                 w.ty = (w.cy * w.ny) >>> 0;
                 w.pmx = ((w.w - w.tx) / 2) >>> 0; // page margin
                 w.pmy = ((w.h - w.ty) / 2) >>> 0;
+                w.pmx2 = (((w.w2 - w.tx) / 2) + w.w2) >>> 0;
 
                 // data
                 w.mo = [
@@ -103,7 +106,7 @@
                 w.y0 = (w.i0 / w.nx) >>> 0;
                 w.x1 = (w.x0 * w.cx) >>> 0;
                 w.y1 = (w.y0 * w.cy) >>> 0;
-                w.x2 = (w.x1 + w.mx + w.pmx) >>> 0;
+                w.x2 = (w.x1 + w.mx + w.pmx2) >>> 0;
                 w.y2 = (w.y1 + w.my + w.pmy) >>> 0;
                 // console.log(w);
                 w.c0 = dom.canvas([w.dx, w.dy, w.x2, w.y2]);
@@ -157,14 +160,22 @@
                 console.log("stats: " + w.sum + " " + w.avg);
             }
         }
+// mahjong
+var mj = {
+    "init": function() {
+    }
+}
 // words
 var go = {
     "init": function() {
         go.hana = [
             " ","h"," ","a"," ","n"," ","a"," ","f"," ","u"," ","d"," ","a"," "
             ];
+        go.hana2 = [
+            "k","o","i","k","k","o","i"
+            ];
         // layout
-        go.x0 = 688; // position
+        go.x0 = 1330; // position
         go.y0 = 1000;
         go.w0 = 32; // canvas size
         go.h0 = 32;
@@ -175,14 +186,14 @@ var go = {
 
         // bmp array
         go.bmp = [];
-        for (var i = 0; i < go.hana.length; i++) {
-            var k0 = "oxy_" + go.hana[i];
+        for (var i = 0; i < go.hana2.length; i++) {
+            var k0 = "oxy_" + go.hana2[i];
             go.bmp[i] = go.dec(k0);
         }
 
         // canvas array
         go.c = [];
-        for (var i = 0; i < go.hana.length; i++) {
+        for (var i = 0; i < go.hana2.length; i++) {
             var x1 = (i * go.bx + go.mx + go.x0) >>> 0;
             var y1 = go.y0;
             var r0 = [go.w0,go.h0,x1,y1];

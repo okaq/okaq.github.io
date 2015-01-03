@@ -88,7 +88,7 @@
                     }
                 }
 
-                w.stats();
+                // w.stats();
 
                 go.init();
 
@@ -97,7 +97,7 @@
             },
             "hana": function() {
                 // start timer
-                w.begin = window.performance.now();
+                // w.begin = window.performance.now();
                 w.grid();
             },
             "grid": function() {
@@ -128,7 +128,7 @@
                 w.petal = base64DecToArr(w.bloom);
                 w.stamen = w.expand(w.petal);
                 ren.hana();
-                w.time();
+                // w.time();
             },
             "expand": function(b0) {
                 // byte array to bit array
@@ -166,28 +166,33 @@ var mj = {
         // layout
         mj.w0 = 128; // bmp size
         mj.h0 = 128;
-        mj.nx = 6; // bmp count
-        mj.ny = 6;
+        mj.w1 = 2; // cell size
+        mj.h1 = 2;
+        mj.nx = 3; // bmp count // fits 3x4
+        mj.ny = 3;
         mj.nt = (mj.nx * mj.ny) >>> 0;
-        mj.w1 = (mj.nx * mj.w0) >>> 0;
-        mj.h1 = (mj.ny * mj.h0) >>> 0;
-        mj.mx = ((w.w2 - mj.w1) / 2) >>> 0; // margins
-        mj.my = ((w.h - mj.h1) / 2) >>> 0;
+        mj.w2 = (mj.w0 * mj.w1) >>> 0;
+        mj.h2 = (mj.h0 * mj.h1) >>> 0;
+        mj.w3 = (mj.nx * mj.w2) >>> 0;
+        mj.h3 = (mj.ny * mj.h2) >>> 0;
+        mj.mx = ((w.w2 - mj.w3) / 2) >>> 0; // margins
+        mj.my = ((w.h - mj.h3) / 2) >>> 0;
         // data
         mj.nt = 41; // tile count
         mj.k0 = [];
-        mj.db = {};
+        mj.db = [];
         for (var y0 = 0; y0 < mj.ny; y0++) {
             for (var x0 = 0; x0 < mj.nx; x0++) {
-                var x1 = (x0 * mj.w0) >>> 0;
-                var y1 = (y0 * mj.h0) >>> 0;
+                var x1 = (x0 * mj.w2) >>> 0;
+                var y1 = (y0 * mj.h2) >>> 0;
                 var x2 = (x1 + mj.mx) >>> 0;
                 var y2 = (y1 + mj.my) >>> 0;
                 var i0 = (y0 * mj.nx + x0) >>> 0;
-                var i1 = (Math.random() * mj.nt) >>> 0;
+                var i1 = (Math.random() * mj.nt) >>> 0; // i0 % mj.nt;
                 mj.k0[i0] = "mj_" + i1.toString();
-                mj.db[mj.k0[i0]] = dom.canvas([mj.w0, mj.h0, x2, y2]);
-                dom.add(mj.db[mj.k0[i0]]);
+                mj.db[i0] = {};
+                mj.db[i0].c = dom.canvas([mj.w2, mj.h2, x2, y2]);
+                dom.add(mj.db[i0].c);
             }
         }
         // console.log(mj.k0);
@@ -195,13 +200,17 @@ var mj = {
         mj.bmp();
     },
     "bmp": function() {
-        for (var i = 0; i < mj.k0.length; i++) {
+        for (var i = 0; i < mj.db.length; i++) {
             var k1 = mj.k0[i];
-            mj.db[k1].bloom = mj2[k1];
-            mj.db[k1].petal = base64DecToArr(mj.db[k1].bloom);
-            mj.db[k1].stamen = w.expand(mj.db[k1].petal);
+            mj.db[i].bloom = mj2[k1];
+            mj.db[i].petal = base64DecToArr(mj.db[i].bloom);
+            mj.db[i].stamen = w.expand(mj.db[i].petal);
+            mj.db[i].rgb = {};
+            mj.db[i].rgb.fore = rgb.rc();
+            mj.db[i].rgb.bkgd = rgb.rc();
         }
-        console.log(mj.db);
+        // console.log(mj.db);
+        ren.mj();
     }
 }
 // words
@@ -211,11 +220,16 @@ var go = {
             " ","h"," ","a"," ","n"," ","a"," ","f"," ","u"," ","d"," ","a"," "
             ];
         go.hana2 = [
-            "k","o","i","k","k","o","i"
+            "k","o","i","k","o","i"
+            ];
+        go.mj = [
+            "m","a","h","j","o","n","g"
             ];
         // layout
-        go.x0 = 1330; // position
+        go.x0 = 1348; // position
         go.y0 = 1000;
+        go.x1 = 368; // position mj
+        go.y1 = 1000;
         go.w0 = 32; // canvas size
         go.h0 = 32;
         go.mx = 0; // margin
@@ -240,9 +254,26 @@ var go = {
             go.c[i] = c0;
             dom.add(c0);
         }
+        // bmp array
+        go.bmp2 = [];
+        for (var i = 0; i < go.mj.length; i++) {
+            var k0 = "oxy_" + go.mj[i];
+            go.bmp2[i] = go.dec(k0);
+        }
+
+        // canvas array
+        go.c2 = [];
+        for (var i = 0; i < go.mj.length; i++) {
+            var x2 = (i * go.bx + go.mx + go.x1) >>> 0;
+            var y2 = go.y1;
+            var r0 = [go.w0,go.h0,x2,y2];
+            var c0 = dom.canvas(r0);
+            go.c2[i] = c0;
+            dom.add(c0);
+        }
 
         ren.go();
-
+        ren.go2();
     },
     "dec": function(k0) {
         if (!oxy[k0]) {
@@ -329,6 +360,48 @@ var ren = {
                     go.c[i].con.fillStyle = bkgd;
                 }
                 go.c[i].con.fillRect(x0,y0,1,1);
+            }
+        }
+    },
+    "go2": function() {
+        // render go bmp in canvii
+        var fore = rgb.rc();
+        var bkgd = rgb.rc();
+        for (var i = 0; i < go.c2.length; i++) {
+            if (go.bmp2[i] == null) {
+                go.c2[i].con.fillStyle = bkgd;
+                go.c2[i].con.fillRect(0,0,go.c2[i].can.width,go.c2[i].can.height);
+                continue;
+            }
+            for (var j = 0; j < go.bmp2[i].length; j++) {
+                // 32x32 bmp
+                var x0 = j % 32;
+                var y0 = (j / 32) >>> 0;
+                if (go.bmp2[i][j] == 1) {
+                    go.c2[i].con.fillStyle = fore;
+                } else {
+                    go.c2[i].con.fillStyle = bkgd;
+                }
+                go.c2[i].con.fillRect(x0,y0,1,1);
+            }
+        }
+    },
+    "mj": function() {
+        for (var i = 0; i < mj.db.length; i++) { // k0 in mj.db) {
+            // var k1 = mj.k0[i];
+            var mj0 = mj.db[i];
+            // console.log(mj0);
+            for (var j = 0; j < mj0.stamen.length; j++) {
+                var x0 = j % mj.w0;
+                var y0 = (j / mj.w0) >>> 0;
+                var x1 = (x0 * mj.w1) >>> 0;
+                var y1 = (y0 * mj.h1) >>> 0;
+                if (mj0.stamen[j] == 0) {
+                    mj0.c.con.fillStyle = mj0.rgb.bkgd;
+                } else {
+                    mj0.c.con.fillStyle = mj0.rgb.fore;
+                }
+                mj0.c.con.fillRect(x1,y1,mj.w1,mj.h1);
             }
         }
     }

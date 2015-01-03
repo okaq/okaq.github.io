@@ -163,6 +163,32 @@
 // mahjong
 var mj = {
     "init": function() {
+        // layout
+        mj.w0 = 256; // bmp size
+        mj.h0 = 256;
+        mj.nx = 3; // bmp count
+        mj.ny = 3;
+        mj.nt = (mj.nx * mj.ny) >>> 0;
+        mj.w1 = (mj.nx * mj.w0) >>> 0;
+        mj.h1 = (mj.ny * mj.h0) >>> 0;
+        mj.mx = ((w.w2 - mj.w1) / 2) >>> 0; // margins
+        mj.my = ((w.h2 - mj.h1) / 2) >>> 0;
+        // data
+        mj.nt = 41; // tile count
+        mj.k0 = [];
+        mj.db = {};
+        for (var y0 = 0; y0 < mj.ny; y0++) {
+            for (var x0 = 0; x0 < mj.nx; x0++) {
+                var x1 = (x0 * mj.w0) >>> 0;
+                var y1 = (y0 * mj.h0) >>> 0;
+                var x2 = (x1 + mj.mx) >>> 0;
+                var y2 = (y1 + mj.my) >>> 0;
+                var i0 = (y0 * mj.nx + x0) >>> 0;
+                var i1 = (Math.random() * mj.nt) >>> 0;
+                mj.k0[i0] = "mj_" + i1.toString();
+            }
+        }
+        console.log(mj.k0);
     }
 }
 // words

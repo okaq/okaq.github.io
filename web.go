@@ -13,6 +13,7 @@ const (
     OXY = "oxy.js"
     MJ2 = "mj2.js"
     PORT = ":8008"
+    PINO = "pino.html"
 )
 
 func main() {
@@ -32,6 +33,11 @@ func main() {
         fmt.Println(r)
         http.ServeFile(w, r, MJ2)
     })
+    http.HandleFunc("/pino", func(w http.ResponseWriter, r *http.Request) {
+        fmt.Println(r)
+        http.ServeFile(w, r, PINO)
+    })
+ 
     fmt.Println("Starting okaq.github.io dev web server on localhost" + PORT)
     http.ListenAndServe(PORT, nil)
 }

@@ -28,12 +28,18 @@ var g = {
         g.subs = [dom, vid];
         g.subs.forEach(function(el){el.init();});
 
+        document.addEventListener("click", g.click, false);
+
         var end = window.performance.now();
         var delta = end - now;
         console.log("total running time: " + delta + "ms");
     },
     "end": function() {
         alert("webrtc not supported. try using modern browser versions");
+    },
+    "click": function(e) {
+        console.log(e);
+        vid.launch();
     }
 }
 // user media
@@ -51,6 +57,18 @@ var vid = {
     "exists": function() {
         vid.u = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia;
         return vid.u;
+    },
+    "launch": function() {
+        vid.cons = {video:true,audio:false};
+        vid.u.apply(navigator, [vid.cons, vid.success, vid.error]);
+        // strategy: use bg canvas to getimage data
+        // render canvas to display the averaged frames
+    },
+    "success": function(stream) {
+        console.log("stream ok");
+    },
+    "error": function(msg) {
+        console.log("error: " + msg.name);
     }
 }
 // dom

@@ -31,6 +31,9 @@ var g = {
         var end = window.performance.now();
         var delta = end - now;
         console.log("total running time: " + delta + "ms");
+    },
+    "end": function() {
+        alert("webrtc not supported. try using modern browser versions");
     }
 }
 // user media
@@ -39,12 +42,15 @@ var vid = {
         // test navigator support
         if (vid.exists()) {
             console.log("ok to go!");
+            console.log(vid.u);
         } else {
             console.log("not found");
+            g.end();
         }
     },
     "exists": function() {
-        return !!(navigator.webkitGetUserMedia);
+        vid.u = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia;
+        return vid.u;
     }
 }
 // dom

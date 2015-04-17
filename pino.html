@@ -58,7 +58,7 @@ var g = {
         // video framerate using high resolution timers
         // and compare frame differences precisely, pixel-by-pixel
         // vid.loop();
-        g.id = window.setInterval(vid.avg, 1000);
+        g.id = window.setInterval(vid.avg, 30);
     }
 }
 // user media
@@ -98,8 +98,9 @@ var vid = {
     "success": function(stream) {
         console.log("stream ok");
         vid.v = dom.vid();
+        vid.v.vid.addEventListener("loadedmetadata", vid.meta, false);
         vid.v.vid.src = window.URL.createObjectURL(stream);
-        vid.v.vid.onloadedmetadata = vid.meta;
+        // vid.v.vid.onloadedmetadata = vid.meta;
     },
     "error": function(msg) {
         console.log("error: " + msg.name);
@@ -114,9 +115,9 @@ var vid = {
         dom.add(vid.w.a);
         vid.w.a.can.addEventListener("click", g.avg, false);
         vid.w.b = dom.canvas([640,480,1344,16]); // offscreen canvas
-        vid.w.c = vid.w.a.con.createImageData(640, 480); // rgba color data acculmulator
+        vid.w.c = []; // rgba color data acculmulator
         // dom.add(vid.w.b);
-        vid.w.d = vid.w.a.con.createImageData(640, 480); // new avg pixel data
+        vid.w.d = vid.w.a.con.getImageData(0, 0, 640, 480); // new avg pixel data
         ren.clear();
         console.log(vid.v.vid);
         vid.v.vid.play();
@@ -145,8 +146,10 @@ var vid = {
         }
         if (vid.t == 2) {
             // avg
+            var avg0 = 0;
             for (var i = 0; i < len0; i++) {
-                vid.w.d[i] = vid.w.c[i] / 3; // (Math.random() * 255) >>> 0; // vid.w.c[i] / 3;
+                avg0 = vid.w.c[i] / 3.0;
+                vid.w.d.data[i] = vid.clamp(avg0); // (Math.random() * 255) >>> 0; // vid.w.c[i] / 3;
                 vid.w.c[i] = 0; // reset
             }
             ren.avg();
@@ -156,7 +159,18 @@ var vid = {
             vid.t = 0;
         }
         // console.log(len0);
-        // console.log(vid.w.d);
+        // console.log(vid.w.d.data);
+    },
+    "clamp": function(x0) {
+        // make sure value is in byte range 0-255
+        var x1 = x0 >>> 0;
+        if (x1 < 0) {
+            x1 = 0;
+        }
+        if (x1 > 255) {
+            x1 = 255;
+        }
+        return x1
     }
 }
 // render
@@ -165,7 +179,13 @@ var ren = {
         vid.w.a.con.fillStyle = rgb.css([230,255,255,1.0]);
         vid.w.a.con.fillRect(0,0,vid.w.a.can.width,vid.w.a.can.height);
     },
+    "rand": function() {
+        vid.w.a.con.fillStyle = rgb.rc();
+        vid.w.a.con.fillRect(0,0,vid.w.a.can.width,vid.w.a.can.height);
+    },
     "avg": function() {
+        // ren.rand();
+        // console.log(vid.w.d.data.length);
         vid.w.a.con.putImageData(vid.w.d, 0, 0);
     }
 }

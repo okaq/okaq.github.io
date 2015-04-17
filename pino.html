@@ -10,9 +10,9 @@
         <link rel="shortcut icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAIAAAD8GO2jAAAAMklEQVR4nGL5H9nDQEvARFPTRy0YtWDUglELRi0YtWDUglELRi0YtWDUAioCQAAAAP//nxMCJyiFuqAAAAAASUVORK5CYII=" />
         <style type="text/css">
             html,body{width:1920px;height:1080px;margin:0px;border:0px;padding:0px;background-color:rgba(255,255,255,1.0);}
-            #title{position:absolute;top:16px;left:16px;display:inline;}
-            #video{position:absolute;top:570px;left:24px;display:inline;}
-            #render{position:absolute;top:570px;left:690px;display:inline;}
+            #title{position:absolute;top:4px;left:16px;display:inline;padding:14px;background-color:rgba(75,60,85,1.0);color:rgba(175,230,220,1.0);}
+            #video{position:absolute;top:570px;left:16px;display:inline;padding:14px;background-color:rgba(75,60,85,1.0);color:rgba(175,230,220,1.0);}
+            #render{position:absolute;top:570px;left:672px;display:inline;padding:14px;background-color:rgba(75,60,85,1.0);color:rgba(175,230,220,1.0);}
         </style>
         <script type="text/javascript">
             // ok
@@ -38,12 +38,13 @@ var g = {
         // subsystems
         g.subs = [dom, vid];
         g.subs.forEach(function(el){el.init();});
-
+        
         document.addEventListener("click", g.click, false);
         // trigger button click on 1s timeout
         g.ev = [];
         g.ev[0] = new Event("click");
         document.dispatchEvent(g.ev[0]);
+        // vid.launch();
 
         var end = window.performance.now();
         var delta = end - now;
@@ -128,6 +129,7 @@ var vid = {
         console.log(vid.v.vid);
         vid.v.vid.play();
         vid.w.a.can.dispatchEvent(g.ev[0]);
+        // window.setTimeout(g.avg, 100);
     },
     "loop": function() {
         var t0 = vid.v.vid.currentTime();

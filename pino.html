@@ -59,7 +59,19 @@ var vid = {
         return vid.u;
     },
     "launch": function() {
-        vid.cons = {video:true,audio:false};
+        vid.cons = {
+            "audio": false,
+            "video": {
+                "mandatory": {
+                    "minWidth": 640,
+                    "maxWidth": 640,
+                    "minHeight": 480,
+                    "maxHeight": 480,
+                    "minFrameRate": 30
+                },
+                "optional": []
+            }
+        };
         vid.u.apply(navigator, [vid.cons, vid.success, vid.error]);
         // strategy: use bg canvas to getimage data
         // render canvas to display the averaged frames
@@ -75,6 +87,8 @@ var vid = {
     },
     "meta": function(e) {
         console.log(e);
+        // get size, create canvas
+        console.log(vid.v.vid);
         vid.v.vid.play();
     }
 }

@@ -16,6 +16,14 @@
         console.log("okaq github io webrtc avg frames test");
 // async load
 (function() {
+ window.requestAnimFrame = (function(){
+ return  window.requestAnimationFrame       ||
+         window.webkitRequestAnimationFrame ||
+         window.mozRequestAnimationFrame    ||
+         function(callback){
+            window.setTimeout(callback, 1000 / 60);
+        };
+    })();
  window.addEventListener("load", function(e) {g.init(e);}, false);
  })();
 // game
@@ -49,7 +57,8 @@ var g = {
         // for a more exact solution we can measure the webcam
         // video framerate using high resolution timers
         // and compare frame differences precisely, pixel-by-pixel
-        vid.loop();
+        // vid.loop();
+        g.id = window.setInterval(vid.avg, 1000);
     }
 }
 // user media
@@ -105,20 +114,49 @@ var vid = {
         dom.add(vid.w.a);
         vid.w.a.can.addEventListener("click", g.avg, false);
         vid.w.b = dom.canvas([640,480,1344,16]); // offscreen canvas
-        vid.w.c = []; // rgba color data acculmulator
+        vid.w.c = vid.w.a.con.createImageData(640, 480); // rgba color data acculmulator
+        // dom.add(vid.w.b);
+        vid.w.d = vid.w.a.con.createImageData(640, 480); // new avg pixel data
         ren.clear();
         console.log(vid.v.vid);
         vid.v.vid.play();
     },
     "loop": function() {
         var t0 = vid.v.vid.currentTime();
+        // var t0 = window.performance.now();
         if (t0 != vid.s) {
-            v.avg();
+            vid.avg();
             vid.s = t0;
         }
-        window.requestAnimationFrame(v.loop);
+        window.requestAnimationFrame(vid.loop);
         // frame 1,2 add rgb values to acculmulator
         // frame 3 sum and average, then render to canvas
+    },
+    "avg": function() {
+        vid.w.b.con.drawImage(vid.v.vid, 0, 0, 640, 480);
+        vid.w.b.img = vid.w.b.con.getImageData(0, 0, 640, 480);
+        var len0 = vid.w.b.img.data.length;
+        for (var i = 0; i < len0; i++) {
+            if (vid.w.c[i]) {
+                vid.w.c[i] = vid.w.c[i] + vid.w.b.img.data[i];
+            } else {
+                vid.w.c[i] = vid.w.b.img.data[i];
+            }
+        }
+        if (vid.t == 2) {
+            // avg
+            for (var i = 0; i < len0; i++) {
+                vid.w.d[i] = vid.w.c[i] / 3; // (Math.random() * 255) >>> 0; // vid.w.c[i] / 3;
+                vid.w.c[i] = 0; // reset
+            }
+            ren.avg();
+        }
+        vid.t = vid.t + 1;
+        if (vid.t > 2) {
+            vid.t = 0;
+        }
+        // console.log(len0);
+        // console.log(vid.w.d);
     }
 }
 // render
@@ -126,6 +164,9 @@ var ren = {
     "clear": function() {
         vid.w.a.con.fillStyle = rgb.css([230,255,255,1.0]);
         vid.w.a.con.fillRect(0,0,vid.w.a.can.width,vid.w.a.can.height);
+    },
+    "avg": function() {
+        vid.w.a.con.putImageData(vid.w.d, 0, 0);
     }
 }
 // dom

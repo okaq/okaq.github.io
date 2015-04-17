@@ -41,6 +41,15 @@ var g = {
     "click": function(e) {
         console.log(e);
         vid.launch();
+    },
+    "avg": function(e) {
+        console.log(e);
+        // using requestAnimationFrame which is sync'd to the
+        // video refresh rate (60fps)
+        // for a more exact solution we can measure the webcam
+        // video framerate using high resolution timers
+        // and compare frame differences precisely, pixel-by-pixel
+        vid.loop();
     }
 }
 // user media
@@ -89,13 +98,27 @@ var vid = {
     "meta": function(e) {
         console.log(e);
         // get size, create canvas
+        vid.t = 0; // tick
+        vid.s = -1; // video time clock
         vid.w = {};
         vid.w.a = dom.canvas([640,480,672,16]); // render canvas
         dom.add(vid.w.a);
+        vid.w.a.can.addEventListener("click", g.avg, false);
         vid.w.b = dom.canvas([640,480,1344,16]); // offscreen canvas
+        vid.w.c = []; // rgba color data acculmulator
         ren.clear();
         console.log(vid.v.vid);
         vid.v.vid.play();
+    },
+    "loop": function() {
+        var t0 = vid.v.vid.currentTime();
+        if (t0 != vid.s) {
+            v.avg();
+            vid.s = t0;
+        }
+        window.requestAnimationFrame(v.loop);
+        // frame 1,2 add rgb values to acculmulator
+        // frame 3 sum and average, then render to canvas
     }
 }
 // render

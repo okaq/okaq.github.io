@@ -66,9 +66,16 @@ var vid = {
     },
     "success": function(stream) {
         console.log("stream ok");
+        vid.v = dom.vid();
+        vid.v.vid.src = window.URL.createObjectURL(stream);
+        vid.v.vid.onloadedmetadata = vid.meta;
     },
     "error": function(msg) {
         console.log("error: " + msg.name);
+    },
+    "meta": function(e) {
+        console.log(e);
+        vid.v.vid.play();
     }
 }
 // dom
@@ -93,6 +100,15 @@ var dom = {
     },
     "remove": function(c0) {
         dom.alpha.removeChild(c0.can);
+    },
+    "vid": function() {
+        var v0 = {};
+        v0.vid = document.createElement("video");
+        v0.vid.style.position = "absolute";
+        v0.vid.style.top = "16px";
+        v0.vid.style.left = "16px";
+        dom.alpha.appendChild(v0.vid);
+        return v0;
     }
 }
         </script>

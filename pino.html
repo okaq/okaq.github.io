@@ -10,6 +10,9 @@
         <link rel="shortcut icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAIAAAD8GO2jAAAAMklEQVR4nGL5H9nDQEvARFPTRy0YtWDUglELRi0YtWDUglELRi0YtWDUAioCQAAAAP//nxMCJyiFuqAAAAAASUVORK5CYII=" />
         <style type="text/css">
             html,body{width:1920px;height:1080px;margin:0px;border:0px;padding:0px;background-color:rgba(255,255,255,1.0);}
+            #title{position:absolute;top:16px;left:16px;display:inline;}
+            #video{position:absolute;top:570px;left:24px;display:inline;}
+            #render{position:absolute;top:570px;left:690px;display:inline;}
         </style>
         <script type="text/javascript">
             // ok
@@ -38,6 +41,9 @@ var g = {
 
         document.addEventListener("click", g.click, false);
         // trigger button click on 1s timeout
+        g.ev = [];
+        g.ev[0] = new Event("click");
+        document.dispatchEvent(g.ev[0]);
 
         var end = window.performance.now();
         var delta = end - now;
@@ -111,16 +117,17 @@ var vid = {
         vid.t = 0; // tick
         vid.s = -1; // video time clock
         vid.w = {};
-        vid.w.a = dom.canvas([640,480,672,16]); // render canvas
+        vid.w.a = dom.canvas([640,480,672,96]); // render canvas
         dom.add(vid.w.a);
         vid.w.a.can.addEventListener("click", g.avg, false);
-        vid.w.b = dom.canvas([640,480,1344,16]); // offscreen canvas
+        vid.w.b = dom.canvas([640,480,1344,96]); // offscreen canvas
         vid.w.c = []; // rgba color data acculmulator
         // dom.add(vid.w.b);
         vid.w.d = vid.w.a.con.getImageData(0, 0, 640, 480); // new avg pixel data
         ren.clear();
         console.log(vid.v.vid);
         vid.v.vid.play();
+        vid.w.a.can.dispatchEvent(g.ev[0]);
     },
     "loop": function() {
         var t0 = vid.v.vid.currentTime();
@@ -216,7 +223,7 @@ var dom = {
         var v0 = {};
         v0.vid = document.createElement("video");
         v0.vid.style.position = "absolute";
-        v0.vid.style.top = "16px";
+        v0.vid.style.top = "96px";
         v0.vid.style.left = "16px";
         dom.alpha.appendChild(v0.vid);
         return v0;
@@ -252,6 +259,9 @@ var rgb = {
         </script>
     </head>
     <body id="alpha">
+        <h1 id="title">WebRTC Frame Averaging Render Test</h1>
+        <h2 id="video">Live video capture from WebCam</h2>
+        <h2 id="render">Canvas2D render of last three frames averaged</h2>
     </body>
 </html>
 

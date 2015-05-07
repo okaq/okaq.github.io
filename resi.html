@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head id="zeta">
+        <title>okaq</title>
+        <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+        <meta name="viewport" content="width=1920,height=1080,initial-scale=1" />
+        <meta name="source" content="https://github.com/okaq/okaq.gira" />
+        <meta name="creator" content="AQ<aq@okaq.com>" />
+        <meta name="date" content="2015-05-06" />
+        <link rel="shortcut icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAIAAAD8GO2jAAAAMElEQVR4nOzNQREAIAwDQYbBe2RTE81vT8DtS/5pdqt3AAAAAAAAAAAAsNgEAAD//48UAlAcOHAKAAAAAElFTkSuQmCC" />
+        <style type="text/css">
+            html,body{width:1920px;height:1080px;margin:0px;border:0px;padding:0px;background-color:rgba(255,255,255,1.0);}
+        </style>
+        <script type="text/javascript">
+            // ok
+        console.log("okaq gira karu hoka responsive!");
+        // async
+        (function() {
+         window.addEventListener("load",function(e){g.init(e);},false);
+         })();
+// game
+var g = {
+    "init": function(e) {
+        console.log(e);
+        var now = window.performance.now();
+
+        // subsystems
+        g.subs = [dom,lay,sce];
+        g.subs.forEach(function(el){el.init();});
+
+        // dom debug console
+        // obtain screen resolution
+        ren.text();
+
+        // stats
+        var done = window.performance.now();
+        var total = done - now;
+        console.log("total running time " + total + "ms");
+    }
+}
+var sce = {
+    "init": function() {
+        sce.g = []; // scene graph
+        sce.g[0] = [];
+        sce.g[0][0] = dom.canvas(lay.t);
+        dom.add(sce.g[0][0]);
+    }
+}
+var lay = {
+    "init": function() {
+        lay.s = {}; // screen resolution
+        lay.t = [384,384,0,0]; // text box
+        console.log(window.screen);
+        lay.s["innerWidth"] = window.innerWidth;
+        lay.s["innerHeight"] = window.innerHeight;
+        lay.s["offsetWidth"] = document.body.offsetWidth;
+        lay.s["offsetHeight"] = document.body.offsetHeight;
+        lay.s["clientWidth"] = document.body.clientWidth;
+        lay.s["clientHeight"] = document.body.clientHeight;
+        lay.s["scrollWidth"] = document.body.scrollWidth;
+        lay.s["scrollHeight"] = document.body.scrollHeight;
+        lay.s["screenWidth"] = window.screen.width;
+        lay.s["screenHeight"] = window.screen.height;
+    }
+}
+// dom
+var dom = {
+    "init": function() {
+        dom.alpha = document.getElementById("alpha");
+        console.log(dom.alpha);
+    },
+    "canvas": function(r0) {
+        var c0 = {};
+        c0.can = document.createElement("canvas");
+        c0.con = c0.can.getContext("2d");
+        c0.can.width = r0[0];
+        c0.can.height = r0[1];
+        c0.can.style.position = "absolute";
+        c0.can.style.top = r0[3] + "px";
+        c0.can.style.left = r0[2] + "px";
+        return c0;
+    },
+    "add": function(c0) {
+        dom.alpha.appendChild(c0.can);
+    },
+    "remove": function(c0) {
+        dom.alpha.removeChild(c0.can);
+    }
+}
+// render
+var ren = {
+    "text": function() {
+        sce.g[0][0].con.fillStyle = rgba.css([0,40,0,1.0]);
+        sce.g[0][0].con.fillRect(0,0,sce.g[0][0].can.width,sce.g[0][0].can.height);
+        sce.g[0][0].con.fillStyle = rgba.css([200,80,200,1.0]);
+        sce.g[0][0].con.font = "16px monospace";
+        var x0 = 8;
+        var y0 = 20;
+        var i0 = 0;
+        for (var k0 in lay.s) {
+            var s0 = k0 + ": " + lay.s[k0] + "px";
+            sce.g[0][0].con.fillText(s0, x0, (y0 + (i0 * 20)));
+            i0 = i0 + 1;
+        }
+    }
+}
+// colors
+var rgba = {
+    "rc": function() {
+        // return random rgba
+        var c0 = [
+            rgba.rb(),
+            rgba.rb(),
+            rgba.rb(),
+            1.0
+            ];
+        return c0;
+    },
+    "css": function(c0) {
+        // return css string
+        return "rgba(" + c0.join(",") + ")";
+    },
+    "rb": function() {
+        // random byte
+        return (Math.random() * 255) >>> 0;
+    },
+    "rba": function(size0) {
+        // random byte array length of input
+        var r0 = [];
+        for (var i = 0; i < size0; i++) {
+            r0.push(rgba.rb());
+        }
+        return r0;
+    }
+}
+         </script>
+    </head>
+    <body id="alpha">
+    </body>
+</html>
+
+

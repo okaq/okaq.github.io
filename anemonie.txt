@@ -1,0 +1,42 @@
+Project Anemone
+AQ <aq@okaq.com>
+2016-09-20
+
+Codename: Anemone (sea anemone, isoginchaku)
+
+An A.I. agent that can "use" the world wide web
+as effectively as humans.
+
+Let's define the term "use the web":
+In the course of conducting research
+or transacting via e-commerce systems,
+we may have 20 browser tabs open, navigate
+(somewhat) efortlessly through many
+of different UI paradigms 
+(retro, minimal, responsive, dynamic, etc).
+In fact each web app is different.
+Each app on divergant devices may also
+behave differently due to performance issues.
+What should be the relatively simple task of 
+researching a grade school level paper on coral reefs
+
+
+The goals are 
+democratize A.I.
+foster A.I. pedagogy
+product: virtual personal assistant
+that understands human language queries
+and can execute them, returning condensed
+results as well as a human
+product: a proxy usability layer
+
+Funds for
+solving the problem
+strategy is to break into sub-problems and sample the web!
+start with 100 most useful sites and scale
+branding, marketing, go-to-market strategy
+
+NYC A.I. Hub
+pivotal in community
+
+

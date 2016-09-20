@@ -46,11 +46,26 @@ own it!
 shoot - 220W twin standing lamps
 android hidef capture to disk
 1 minute total run time
+fade to black at end, rising volume on ragtime, end credits
+intro big font 3 titles as we sit down
+single dissonant piano key chords to get attention, chuck ugen
+"project anemone" "nyu ai" "created by: ahmad qurashi"
+uploaded and encoded to youtube
 
 are we a product or a service
 the immediate solutions are web scraping on a per data rate
 but we could also build a search engine
 or a usability proxy (age, disability, locale)
 
+the key
+training a reward function
+to place the highest value
+on the information on the page 
+that is most relevant to the user
+and that data may be obscured by the page's UI
+mouseover popup modal div's etc
+
+driver-less cars
+surfer-less web navigation
 
 

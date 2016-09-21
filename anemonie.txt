@@ -68,4 +68,8 @@ mouseover popup modal div's etc
 driver-less cars
 surfer-less web navigation
 
+one ultimate goal is automation of tasks
+get every contact who will be attending a conference
+post a url link of my demo to every startup forum
+
 

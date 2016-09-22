@@ -9,10 +9,18 @@
         <meta name="date" content="2016-09-20" />
         <link rel="shortcut icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAIAAAD8GO2jAAAAMklEQVR4nGJZ+mILAy0BE01NH7Vg1IJRC0YtGLVg1IJRC0YtGLVg1IJRC6gIAAEAAP//BcIChG7Y06AAAAAASUVORK5CYII=" />
          <style type="text/css">
-            html,body{width:1920px;height:1080px;margin:0px;border:0px;padding:0px;background-color:rgba(255,255,255,1.0);}
+            html,body{width:1920px;height:1080px;margin:16px 16px 16px 64px;border:0px;padding:0px;background-color:rgba(255,255,255,1.0);font-family:'Droid Sans';color:rgba(55,0,0,1.0);}
         </style>
+        <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.16/webfont.js"></script>
          <script type="text/javascript">
-            // ok
+        // web font load
+        var fonts = {
+            google: {
+                families: ['Droid Sans']
+            }
+        };
+        WebFont.load(fonts);
+        // ok
         console.log("ok anemone!");
         // async load
         (function(){window.addEventListener("load",function(e){w.init(e);},false);})();
@@ -30,6 +38,7 @@
     </head>
     <body id="alpha">
         <header id="head1">
+            <canvas id="logo1" width="600px" height="128px"></canvas>
             <h1>Project Anemone</h1>
         </header>
         <section id="summary">

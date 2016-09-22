@@ -76,4 +76,10 @@ lincolncenter.org is unusable due to a buggy script
 an AI to transform a glitchy site, into an inductive one
 that anticipates the most common human use cases
 
+growth strategy
+based upon lecture notes of cs122
+ried hoffman' blitzscaling
+build out all systems simultaneously
+in rapid parallel fashion
+
 

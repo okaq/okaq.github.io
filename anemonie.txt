@@ -72,4 +72,8 @@ one ultimate goal is automation of tasks
 get every contact who will be attending a conference
 post a url link of my demo to every startup forum
 
+lincolncenter.org is unusable due to a buggy script
+an AI to transform a glitchy site, into an inductive one
+that anticipates the most common human use cases
+
 

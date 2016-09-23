@@ -10,6 +10,10 @@
         <link rel="shortcut icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAIAAAD8GO2jAAAAMklEQVR4nGJZ+mILAy0BE01NH7Vg1IJRC0YtGLVg1IJRC0YtGLVg1IJRC6gIAAEAAP//BcIChG7Y06AAAAAASUVORK5CYII=" />
          <style type="text/css">
             html,body{width:1920px;height:1080px;margin:16px 16px 16px 64px;border:0px;padding:0px;background-color:rgba(255,255,255,1.0);font-family:'Montserrat';color:rgba(0,0,0,1.0);}
+            h1{margin:8px 0px 8px 4px;}
+            h2{margin:8px 0px 8px 6px;}
+            p{margin:8px 0px 8px 8px;}
+            ul{margin:8px 0px 8px 8px;}
         </style>
         <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.16/webfont.js"></script>
          <script type="text/javascript">
@@ -34,8 +38,10 @@
                 // canvas
                 w.c = document.getElementById("logo1");
                 console.log(w.c);
+                w.c.con = w.c.getContext('2d');
+
                 w.c.con.fillStyle = "rgba(10,10,10,1.0)";
-                w.c.con.fillRect(0,0,w.c.can.width,w.c.can.height);
+                w.c.con.fillRect(0,0,w.c.width,w.c.height);
 
                 var t1 = window.performance.now() - t0;
                 console.log("total running time: " + t1 + " ms");
@@ -50,7 +56,15 @@
         </header>
         <section id="summary">
             <h2>Executive Summary</h2>
-            <p class="exec1">an A.I. that can surf the web comperable to a human operator</p>
+            <p class="exec1">A.I. that can surf the web as well as a human</p>
+        </section>
+        <section id="problem">
+            <h2>The Problem</h2>
+            <p>Web Usability is a mess.</p>
+        </section>
+        <section id="market">
+            <h2>The Market for a Web A.I.</h2>
+            <p>Potentially we are talking about every business and consumer that requires Web Tech. 4B+ by 2020.</p>
         </section>
         <section id="goals">
             <h2>Goals</h2>
@@ -61,6 +75,10 @@
         <section id="nyc">
             <h2>NYC as A.I. Hub</h2>
             <p>Intellectual Density</p>
+        </section>
+        <section id="product">
+        </section>
+        <section id="funds">
         </section>
     </body>
 </html>

@@ -77,9 +77,18 @@ an AI to transform a glitchy site, into an inductive one
 that anticipates the most common human use cases
 
 growth strategy
-based upon lecture notes of cs122
+based upon lecture notes of cs183
 ried hoffman' blitzscaling
 build out all systems simultaneously
 in rapid parallel fashion
+
+problem formulation
+right now using phantomjs or selenium
+one has to manually script the interaction
+we want to teach an agent to master a site upon first load
+
+intelligent web automation
+not just for regression and usability testing
+the agent can also map "trouble spots" into inductive ui
 
 

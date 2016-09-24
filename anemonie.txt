@@ -78,7 +78,7 @@ that anticipates the most common human use cases
 
 growth strategy
 based upon lecture notes of cs183
-ried hoffman' blitzscaling
+reid hoffman' blitzscaling
 build out all systems simultaneously
 in rapid parallel fashion
 
@@ -90,5 +90,9 @@ we want to teach an agent to master a site upon first load
 intelligent web automation
 not just for regression and usability testing
 the agent can also map "trouble spots" into inductive ui
+
+incorporation status plans
+nyc based, delaware c corp, issue shares
+general solicitation, crowd equity platform
 
 

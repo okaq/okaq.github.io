@@ -1,0 +1,88 @@
+okaq
+YC SUS 2020 application
+
+okaq.com
+"nano games at peta scale"
+
+Contact: AQ <aq@okaq.com>
+
+Date: 2019-12-12
+
+Public cloud tech allows us to design web games at global scale.
+
+Typical net latencies in the range of ~120ms per ping
+are available to most humans on the Internet.
+
+For even a commodity ChromeOS device, performance
+is adequate to render 1000 polys at 12 FPS in WebGL.
+
+These advantages are sufficient to design "nano games".
+
+Using minimal cloud VM instance resources, we can
+maximize concurrent player experiences.
+
+Rather than real-time multiplayer action games that
+may require sub 50ms latency and 60 FPS rendering performance.
+
+Okaq's focus on will be on timeless turn-based strategy games.
+
+The initial thematic content was centered around:
+K-12 AI Pedagogy.
+
+"Teaching kids AI via video games"
+
+Starting with the primitives of basic computational probability:
+spaces, events, random variables, conditioning, belief nets.
+
+And then jumping into Bayesian Inference:
+prior, likelihood, and posterior distributions
+and their relations to data and models.
+
+With the eventual goal of gaining an intuitive understanding 
+for How Machines Can Learn.
+
+Introducing concepts of perception, memory, attention
+and yes, even The Birth of Artificial Consciousness ;)
+
+The original thesis was simply:
+K-12 AI Pedagogy is virtuall non-existent in schools today
+Teachers are ill-equipped themselves regarding the
+State-of-the-Art in AI Research
+And current materials are not geared toward a K-12 audience
+
+But upon an initial pilot program in two (excellent) schools, 
+I encountered a much deeper crisis in learning today.
+
+Without even having to peel back too many layers of
+the onion it became egregiously obvious.
+
+The thing preventing 100% engagement had nothing to do
+with pedagogy.
+
+Kids themselves were in a state of extreme anxiety.
+
+About their lives, their peers, their future, their world.
+
+So I'd like the few weeks of YC Startup School to explore
+a re-oriention of my original mission.
+
+It isn't just the instruction and legal formation I will
+need help with.
+
+But feedback from the community, other founders, alumni network
+
+And honestly, I plan to give 10x what I receive in the
+form of my own experience and technical expertise.
+
+Revenue plan is to be 100% crowd funded at outset.
+
+I am also building ancillary products:
+self serve texts ads per web screen 
+(with deep discount to fellow founders) ;)
+fine art and digital art auction software
+digital currency and goods exchange 
+okaq youtube channel w/ monetization
+LAN party and demoscene events
+e-sports style competitive arena
+
+

@@ -26,7 +26,7 @@ var a = {
         a.start = window.performance.now();
 
         // subsystems
-        a.subs = [dom,sce,bmp,db];
+        a.subs = [dom,sce,bmp];
         a.subs.forEach(function(el){el.init();});
 
         // cycle
@@ -42,6 +42,10 @@ var a = {
     },
     "cyc": function() {
 	    console.log("nano games");
+
+	    // get screen dims
+	    sce.screen();
+	    
 	    a.id = window.setInterval(a.cyc2, 1000);
     },
 	"cyc2": function() {
@@ -64,6 +68,17 @@ var sce = {
 		dom.add(sce.a.c);
 		sce.a.c.can.dataset.x = "bkgd";
 		sce.a.c.can.addEventListener("click", sce.click, false);
+	},
+	"screen": function() {
+		// the major & the minor
+		sce.b = {};
+		sce.b.a = window.screen;
+		console.log(sce.b.a);
+		// width, height, availWidth, availHeight
+		sce.b.b = function(e) {
+			console.log(e);
+		};
+		window.addEventListener("resize", sce.b.b, false);
 	}
 }
 // dom

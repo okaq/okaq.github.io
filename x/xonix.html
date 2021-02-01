@@ -79,6 +79,30 @@ var sce = {
 			console.log(e);
 		};
 		window.addEventListener("resize", sce.b.b, false);
+
+		// intersection observer api
+	}
+}
+// text
+var txt = {
+	"rect": function(t0, p0) {
+		// input string, output rect at point
+		// all text 32x32 1024-bit pixel blocks
+		let t1 = t0.length;
+		let w0 = (t1 * 32) >>> 0;
+		let r0 = [];
+		r0[2] = p0[0];
+		r0[3] = p0[1];
+		r0[0] = w0;
+		r0[1] = 32;
+
+		return r0;
+	},
+	"form": function(t0) {
+		// all caps array representation for gugi font
+		let t1 = t0.toUpperCase();
+		let t2 = t1.split("");
+		return t2;
 	}
 }
 // dom

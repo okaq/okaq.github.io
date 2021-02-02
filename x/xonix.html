@@ -45,6 +45,7 @@ var a = {
 
 	    // get screen dims
 	    sce.screen();
+	    ren.scren();
 	    
 	    a.id = window.setInterval(a.cyc2, 1000);
     },
@@ -77,10 +78,20 @@ var sce = {
 		// width, height, availWidth, availHeight
 		sce.b.b = function(e) {
 			console.log(e);
+			sce.b.a = window.screen;
+			window.setTimeout(txt.screen,10);
 		};
 		window.addEventListener("resize", sce.b.b, false);
 
 		// intersection observer api
+	},
+	"dim": function() {
+		sce.c = {};
+		sce.c.r = txt.a.c;
+		sce.c.c = dom.canvas(sce.a.r);
+		dom.add(sce.c.c);
+		sce.c.c.dataset.x = "dims";
+		sce.c.c.addEventListener("click", sce.click, false);
 	}
 }
 // text
@@ -103,6 +114,22 @@ var txt = {
 		let t1 = t0.toUpperCase();
 		let t2 = t1.split("");
 		return t2;
+	},
+	"screen": function() {
+		txt.a = {};
+		txt.a.a = "width " + sce.b.a.availWidth;
+		txt.a.b = txt.form(txt.a.a);
+		let p0 = [128,128];
+		txt.a.c = txt.rect(txt.a.a,p0);
+
+		window.setTimeout(sce.dim, 10);
+	}
+}
+// render
+var ren = {
+	"clear": function() {
+	},
+	"screen": function() {
 	}
 }
 // dom

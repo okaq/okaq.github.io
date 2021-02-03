@@ -45,7 +45,10 @@ var a = {
 
 	    // get screen dims
 	    sce.screen();
-	    ren.scren();
+	    txt.screen();
+	    sce.dim();
+	    ren.clear();
+	    ren.screen();
 	    
 	    a.id = window.setInterval(a.cyc2, 1000);
     },
@@ -88,10 +91,10 @@ var sce = {
 	"dim": function() {
 		sce.c = {};
 		sce.c.r = txt.a.c;
-		sce.c.c = dom.canvas(sce.a.r);
+		sce.c.c = dom.canvas(sce.c.r);
 		dom.add(sce.c.c);
-		sce.c.c.dataset.x = "dims";
-		sce.c.c.addEventListener("click", sce.click, false);
+		sce.c.c.can.dataset.x = "dims";
+		sce.c.c.can.addEventListener("click", sce.click, false);
 	}
 }
 // text
@@ -121,15 +124,24 @@ var txt = {
 		txt.a.b = txt.form(txt.a.a);
 		let p0 = [128,128];
 		txt.a.c = txt.rect(txt.a.a,p0);
+		console.log(txt.a);
 
-		window.setTimeout(sce.dim, 10);
+		// window.setTimeout(sce.dim, 10);
 	}
 }
 // render
 var ren = {
 	"clear": function() {
+		sce.a.c.con.fillStyle = rgba.css([0,0,0,1.0]);
+		sce.a.c.con.fillRect(0,0,sce.a.c.can.width,sce.a.c.can.height);
 	},
 	"screen": function() {
+		sce.c.c.con.fillStyle = rgba.css([255,255,255,1.0]);
+		sce.c.c.con.fillRect(0,0,sce.c.c.can.width,sce.c.c.can.height);
+		ren.txt(txt.a.b,sce.c.c);
+	},
+	"txt": function(t0,c0) {
+		
 	}
 }
 // dom

@@ -141,7 +141,22 @@ var ren = {
 		ren.txt(txt.a.b,sce.c.c);
 	},
 	"txt": function(t0,c0) {
-		
+		c0.con.fillStyle = rgba.css([0,0,0,1.0]);
+		for (let i = 0; i < t0.length; i++) {
+			let t1 = t0[i];
+			if (t1 == " ") {
+				continue;
+			}
+			let b0 = bmp.a[t1];
+			let x0 = (i * 32) >>> 0;
+			let p0 = [x0,0];
+			ren.bmp(b0,c0,p0);
+		}
+	},
+	"bmp": function(b0,c0,p0) {
+		// bitmap data at point
+		// 32x32 1024-bit
+
 	}
 }
 // dom

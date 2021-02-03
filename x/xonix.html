@@ -156,7 +156,16 @@ var ren = {
 	"bmp": function(b0,c0,p0) {
 		// bitmap data at point
 		// 32x32 1024-bit
-
+		for (let i = 0; i < b0.length; i++) {
+			if (b0[i] == 1) {
+				continue;
+			}
+			let x0 = i % 32;
+			let x1 = (x0 + p0[0]) >>> 0;
+			let y0 = (i / 32) >>> 0;
+			let y1 = (y0 + p0[1]) >>> 0;
+			c0.con.fillRect(x1,y1,1,1);
+		}
 	}
 }
 // dom

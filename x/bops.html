@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head id="zeta">
+        <title>okaq</title>
+        <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+        <meta name="viewport" content="width=1920,height=1080,initial-scale=1" />
+        <meta name="source" content="https://github.com/okaq/ichiry" />
+        <meta name="creator" content="AQ<aq@okaq.com>" />
+        <meta name="date" content="2021-02-04" />
+        <link rel="shortcut icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAIAAAD8GO2jAAAAMklEQVR4nGKRNH/IQEvARFPTRy0YtWDUglELRi0YtWDUglELRi0YtWDUAioCQAAAAP//JGYBdI4ZOy8AAAAASUVORK5CYII=" />
+        <style type="text/css">
+            html,body{width:1920px;height:1080px;margin:0px;padding:0px;border:0px;background-color:rgba(255,255,255,1.0);}
+        </style>
+        <script type="text/javascript">
+            // ok
+        console.log("okaq xonix!");
+        // async
+        (function(){
+         window.addEventListener("load",function(e){a.init(e);},false);
+     })();
+// acta
+var a = {
+    "init": function(e) {
+        console.log(e);
+        // start time
+        a.start = window.performance.now();
+
+        // subsystems
+        a.subs = [dom,sce,bmp];
+        a.subs.forEach(function(el){el.init();});
+
+        // cycle
+	    a.tick = 0;
+	    a.max = 1;
+	    a.id = window.setTimeout(a.cyc, 1000);
+
+        // stats
+        var done = window.performance.now();
+        var total = done - a.start;
+        console.log("total load time: " + total + "ms.");
+ 
+    },
+    "cyc": function() {
+	    console.log("nano games");
+
+    }
+}
+// scene
+var sce = {
+	"init": function() {
+		sce.a = {};
+		sce.a.r = [1920,1080,0,0];
+		sce.a.c = dom.canvas(sce.a.r);
+		dom.add(sce.a.c);
+		sce.a.c.can.dataset.x = "bkgd";
+		sce.a.c.can.addEventListener("click", sce.click, false);
+	},
+	"click": function(e) {
+		console.log(e);
+	}
+}
+// render
+var ren = {
+	"splash": function() {
+		sce.a.c.con.fillStyle = rgba.rand();
+		sce.a.c.con.fillRect(0,0,sce.a.c.can.width,sce.a.c.can.height);
+	}
+}
+// dom
+var dom = {
+    "init": function() {
+        dom.alpha = document.getElementById("alpha");
+        console.log(dom.alpha);
+    },
+    "canvas": function(r0) {
+        var c0 = {};
+        c0.can = document.createElement("canvas");
+        c0.con = c0.can.getContext("2d");
+        c0.can.width = r0[0];
+        c0.can.height = r0[1];
+        c0.can.style.position = "absolute";
+        c0.can.style.top = r0[3] + "px";
+        c0.can.style.left = r0[2] + "px";
+        return c0;
+    },
+    "add": function(c0) {
+        dom.alpha.appendChild(c0.can);
+    },
+    "remove": function(c0) {
+        dom.alpha.removeChild(c0.can);
+    }
+}
+// bitmap
+var bmp = {
+    "init": function() {
+        // decode gugi bitmap font
+        bmp.a = {};
+        var x0 = 0;
+        for (var k in gugi) {
+            x0++;
+            var s0 = gugi[k];
+            var s1 = k[0];
+            var b0 = base64DecToArr(s0);
+            bmp.a[s1] = bmp.exp(b0);
+        }
+        console.log("bmp gugi font decoded: " + x0 + " chars");
+        console.log(bmp);
+        var s0 = (bmp.a[0].length);
+        var s1 = Math.sqrt(s0);
+        console.log("bmp gugi size: " + s0 + " (" + s1 + "x" + s1 + ")");
+    },
+    "exp": function(b0) {
+        // expansion of uint8array
+        // to string of bits
+        var r0 = [];
+        for (var i = 0; i < b0.length; i++) {
+            var b1 = b0[i];
+            var s0 = binStr(b1);
+            for (var j = 0; j < 8; j++) {
+                var s1 = s0.charAt(j);
+                var n0 = parseInt(s1, 10);
+                r0.push(n0);
+            }
+        }
+        return r0;
+    }
+}
+// colors
+var rgba = {
+    "rc": function() {
+        // return random rgba
+        var c0 = [
+            rgba.rb(),
+            rgba.rb(),
+            rgba.rb(),
+            1.0
+            ];
+        return c0;
+    },
+    "css": function(c0) {
+        // return css string
+        return "rgba(" + c0.join(",") + ")";
+    },
+    "rb": function() {
+        // random byte
+        return (Math.random() * 255) >>> 0;
+    },
+    "rba": function(size0) {
+        // random byte array length of input
+        var r0 = [];
+        for (var i = 0; i < size0; i++) {
+            r0.push(rgba.rb());
+        }
+        return r0;
+    },
+    "rand": function() {
+        return rgba.css(rgba.rc());
+    },
+    "mono": function(c0) {
+        return rgba.css([c0,c0,c0,1.0]);
+    },
+    "rmon": function() {
+        var c0 = rgba.rb();
+        return rgba.mono(c0);
+    }
+}
+    // gugi bitmap font
+    var gugi = {
+    "1": "//////////////////////////////////8////+P////j///+A////gP////j////4////+P////j////4////+P////j////4////+P////j////4////+P////j////4////+P////j////////////////////////////8=",
+    "2": "//////////////////////////////////gf///wD///4Af//+PH///jw///48P//+fD////x////4f///4P///4H///8H///+H////j////4////+P////j////4////+AD///gA/////////////////////////////////8=",
+    "3": "//////////////////////////////////gf///wD///4Af//+PH///jx///48f//+fH////x////4f///wH///8B////4f////H///nx///48f//+PH///jx///4Yf//+AH///wD/////////////////////////////////8=",
+    "4": "///////////////////////////////////f///4j///+I////iP///wj///8Y////GP///hj///4Y///+OP///jj///w4///8OP///Hj///wAP//4AD///AA////4////+P////j////4////////////////////////////8=",
+    "5": "/////////////////////////////////+AH///gB///4Af//+P////j////4////+P////j////4A///+AH////h////8P////D///nw///w8P//8PD///Dw///4Yf//+AH///wD/////////////////////////////////8=",
+    "6": "//////////////////////////////////gf///wD///4Af//+PD///jw///48P//+Pn///j////4A///+AH///gB///48P//+PD///jw///48P//+PD///jw///4Yf//+AH///wD/////////////////////////////////8=",
+    "7": "/////////////////////////////////8AH///AA///wAP////D////x////4////+P////H////x////4////+P////D////w////8f////H////x////4f///+H////h////4f////P////////////////////////////8=",
+    "8": "//////////////////////////////////gf///wB///4Af//+PD///jw///48P//+PD///jw///4Yf///AH///gB///48P//8Pj///D4///w+P//8Pj///D4///wYP//+AH///wD/////////////////////////////////8=",
+    "9": "//////////////////////////////////gf///wB///4Af//+PD///jw///48P//+PD///jw///48P//+PD///gA///8AP///wD////w///48P//+PD///jw///4Yf//+AH///wD/////////////////////////////////8=",
+    "0": "//////////////////////////////////gf///wD///4Af//+PH///jx///48f//+PH///jx///48f//+PH///jx///48f//+PH///jx///48f//+PH///jx///4Yf//+AH///wD/////////////////////////////////8=",
+    "A": "//////////////////////////////////w////4H///+B////gf///wD///8Y////GP///hh///48f//+PH///Dw///x+P//8Zj//+EIf//jDH//4wx//8P8P//H/j//x/4//8f+P//v/3///////////////////////////8=",
+    "B": "/////////////////////////////////8AP//+AB///gAP//4fj//+H4///h+P//4fj//+H4///hAP//4QH//+EA///hiH//4fx//+H8f//h/H//4fx//+H8f//h8H//4QD//+MB/////////////////////////////////8=",
+    "C": "//////////////////////////////////AP///AA///wAH//4fh//+H8f//h/H//4fx//+H////h////4f///+H////h////4f///+H8///h/H//4fx//+H8f//g8H//8AD///gB/////////////////////////////////8=",
+    "D": "/////////////////////////////////8AP//+AA///gAH//4fh//+H8f//h/H//4/x//+P8f//j/H//4/x//+P8f//j/H//4/x//+P8f//j/H//4/x//+P8f//j8H//4wD//+MB/////////////////////////////////8=",
+    "E": "/////////////////////////////////+AD///gA///4AP//+P////j////4////+P////j////4w///+MP///jD///45///+P////j////4////+P////j////4////+AB///gAf////////////////////////////////8=",
+    "F": "//////////////////////////////////AD///gA///4AP//+P////j////4////+P////j////44///+MH///jD///44///+P////j////4////+P////j////4////+P////j//////////////////////////////////8=",
+    "G": "//////////////////////////////////AP///AB///wAP//4fj//+H4f//h+H//4fj//+H////h////4Y///+EEf//hBH//4Yx//+H8f//h/H//4fx//+H4f//g8H//8AD///gB/////////////////////////////////8=",
+    "H": "/////////////////////////////////8/z//+P8f//h/H//4fx//+H8f//h/H//4fx//+H8f//hjH//4Qx//+EMf//hjH//4fx//+H8f//h/H//4fx//+H8f//h/H//4fx//+P8f//z/v///////////////////////////8=",
+    "I": "//////////////////////////////////5////8P////D////w////8P////D////w////8P////D////w////8P////D////w////8P////D////w////8P////D////w////8P////n////////////////////////////8=",
+    "J": "///////////////////////////////////P////x////8f////H////x////8f////H////x////8f////H////x////8f////H///vx///x8f//8fH///Hx///w4f//+AP///wH////H////////////////////////////8=",
+    "K": "/////////////////////////////////8/7///H8f//x+H//8fD///Hh///xw///8YP///GH///xD///8B////An///wY///8OP///Dh///x8P//8fj///H4f//x/D//8f4///H+P//7/////////////////////////////8=",
+    "L": "/////////////////////////////////+f////j////4////+P////j////4////+P////j////4////+P////j////4////+P////j////4////+P////j////4////+AB///gAf//8AP///////////////////////////8=",
+    "M": "/////////////////////////////////x/4//4P8H/+B/B//gfgf/4H4H/+A+B//gPgf/4jxH/+I8R//jHEf/4xjH/+MYx//jiMf/44jH/+OBx//jgcf/48HH/+PDx//jw8f/4+PH//f37///////////////////////////8=",
+    "N": "/////////////////////////////////8f5//+D8f//gfH//4Hx//+B8f//gPH//4jx//+Icf//jHH//4xx//+OMf//jjH//44R//+PEf//jxH//4+B//+Pgf//j4H//4/B//+Pwf//3/f///////////////////////////8=",
+    "O": "//////////////////////////////////AP///AA///wAH//4fh//+P8f//j/H//4/x//+P8f//j/H//4/x//+P8f//j/H//4/x//+P8f//j/H//4/x//+H8f//g8H//8AD///gB/////////////////////////////////8=",
+    "P": "/////////////////////////////////8AP///AA///wAP//8fh///H4f//x+H//8fh///H4f//x+H//8fh///EA///xAP//8QP///H////x////8f////H////x////8f////H//////////////////////////////////8=",
+    "Q": "///////////////////////////////////////gB///wAP//4AB//+P4f//j/H//4/x//+P8f//j/H//4/x//+P8f//j/H//4/x//+Ocf//jDH//4wx//+MMf//j+H//4AB///AAf//4AD////4/////f////////////////8=",
+    "R": "/////////////////////////////////8AP//+AB///gAP//4fh//+H4f//h+H//4fh//+H4f//h+H//4QD//+EA///hA///4eH//+Hh///h8P//4fj//+H4f//h/D//4fw///H+P////////////////////////////////8=",
+    "S": "//////////////////////////////////AP///AA///wAH//4fh//+P8f//j/H//4/x//+P////h////8AH///gA////+H////x///P8f//j/H//4/x//+P8f//g8H//8AD///gB/////////////////////////////////8=",
+    "T": "/////////////////////////////////8AB//+AAf//gAH///w////8P////D////w////8P////D////w////8P////D////w////8P////D////w////8P////D////w////+P/////////////////////////////////8=",
+    "U": "/////////////////////////////////8/z//+P8f//j/H//4/x//+P8f//j/H//4/x//+P8f//j/H//4/x//+P8f//j/H//4/x//+P8f//j/H//4/x//+P8f//h+H//8AD///gB///+B////////////////////////////8=",
+    "V": "/////////////////////////////////5/5//+P8P//j/H//4/x//+H4f//x+P//8fj///Dw///48P//+PH///hx///8Yf///GP///wj///+A////gf///4H///+B////w////8P////n////////////////////////////8=",
+    "W": "/////////////////////////////////P5/n/j8Px/4/D8f+Hw/H/x8Hh/8eB4//HgeP/w4Hj/+OIw//jiMf/4xjH/+EYx//xHAf/8BwP//A8D//wPA//+D4P//g+H//4fh//+H4f//z/P///////////////////////////8=",
+    "X": "/////////////////////////////////9/7//+P8f//h+H//8fh///Dw///4cf///GH///wj///+A////gf///8H///+B////gP///wD///4Yf//+HH///Dw///x+H//4fh//+P8f//3/v///////////////////////////8=",
+    "Y": "/////////////////////////////////5/5//+P8f//h+H//8fh///Dw///48f//+GH///xj///8A////gf///4H////D////w////8P////D////w////8P////D////w////8P////n////////////////////////////8=",
+    "Z": "/////////////////////////////////8AD//+AAf//gAH////D////w////4f///8P////D////h////w////8P///+H////j////w////4f///+P////D////g////4AB//+AAf////////////////////////////////8="
+    }
+// string view
+/*\
+  |*|
+  |*|  Base64 / binary data / UTF-8 strings utilities
+  |*|
+  |*|  https://developer.mozilla.org/en-US/docs/Web/JavaScript/Base64_encoding_and_decoding
+  |*|
+  \*/
+
+/* Array of bytes to base64 string decoding */
+
+function b64ToUint6 (nChr) {
+     return nChr > 64 && nChr < 91 ?
+         nChr - 65
+         : nChr > 96 && nChr < 123 ?
+         nChr - 71
+         : nChr > 47 && nChr < 58 ?
+         nChr + 4
+         : nChr === 43 ?
+         62
+         : nChr === 47 ?
+         63
+         :
+         0;
+}
+
+function base64DecToArr (sBase64, nBlocksSize) {
+     var sB64Enc = sBase64.replace(/[^A-Za-z0-9\+\/]/g, ""), nInLen = sB64Enc.length,
+         nOutLen = nBlocksSize ? Math.ceil((nInLen * 3 + 1 >> 2) / nBlocksSize) * nBlocksSize : nInLen * 3 + 1 >> 2, 
+         taBytes = new Uint8Array(nOutLen);
+
+     for (var nMod3, nMod4, nUint24 = 0, nOutIdx = 0, nInIdx = 0; nInIdx < nInLen; nInIdx++) {
+         nMod4 = nInIdx & 3;
+         nUint24 |= b64ToUint6(sB64Enc.charCodeAt(nInIdx)) << 18 - 6 * nMod4;
+         if (nMod4 === 3 || nInLen - nInIdx === 1) {
+                 for (nMod3 = 0; nMod3 < 3 && nOutIdx < nOutLen; nMod3++, nOutIdx++) {
+                         taBytes[nOutIdx] = nUint24 >>> (16 >>> nMod3 & 24) & 255;
+                 }
+                 nUint24 = 0;
+         }
+     }
+     return taBytes;
+}
+// bitwise ops
+// https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Operators/Bitwise_Operators
+var binStr = function(nMask) {
+         // nMask must be between 0 and 255
+         for (var nFlag = 0, nShifted = nMask, sMask = ""; nFlag < 32;
+             nFlag++, sMask += String(nShifted >>> 31), nShifted <<= 1);
+         return sMask.slice(24);
+}
+
+
+</script>
+    </head>
+    <body id="alpha">
+    </body>
+</html>
+ 
+
+	
+	
+

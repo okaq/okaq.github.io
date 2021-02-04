@@ -93,8 +93,17 @@ var sce = {
 		sce.c.r = txt.a.c;
 		sce.c.c = dom.canvas(sce.c.r);
 		dom.add(sce.c.c);
-		sce.c.c.can.dataset.x = "dims";
+		sce.c.c.can.dataset.x = "width";
 		sce.c.c.can.addEventListener("click", sce.click, false);
+		
+		sce.d = {};
+		sce.d.r = txt.a.f;
+		sce.d.c = dom.canvas(sce.d.r);
+		dom.add(sce.d.c);
+		sce.d.c.can.dataset.x = "height";
+		sce.d.c.can.addEventListener("click", sce.click, false);
+
+
 	}
 }
 // text
@@ -124,6 +133,11 @@ var txt = {
 		txt.a.b = txt.form(txt.a.a);
 		let p0 = [128,128];
 		txt.a.c = txt.rect(txt.a.a,p0);
+		txt.a.d = "height " + sce.b.a.availHeight;
+		txt.a.e = txt.form(txt.a.d);
+		let p1 = [128,256];
+		txt.a.f = txt.rect(txt.a.d,p1);
+		
 		console.log(txt.a);
 
 		// window.setTimeout(sce.dim, 10);
@@ -139,6 +153,11 @@ var ren = {
 		sce.c.c.con.fillStyle = rgba.css([255,255,255,1.0]);
 		sce.c.c.con.fillRect(0,0,sce.c.c.can.width,sce.c.c.can.height);
 		ren.txt(txt.a.b,sce.c.c);
+		
+		sce.d.c.con.fillStyle = rgba.css([255,255,255,1.0]);
+		sce.d.c.con.fillRect(0,0,sce.d.c.can.width,sce.d.c.can.height);
+		ren.txt(txt.a.e,sce.d.c);
+	
 	},
 	"txt": function(t0,c0) {
 		c0.con.fillStyle = rgba.css([0,0,0,1.0]);

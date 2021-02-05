@@ -43,6 +43,9 @@ var a = {
     "cyc": function() {
 	    console.log("nano games");
 
+	    ren.splash();
+	    sce.two();
+	    ren.pane();
     }
 }
 // scene
@@ -57,6 +60,15 @@ var sce = {
 	},
 	"click": function(e) {
 		console.log(e);
+	},
+	"two": function() {
+		// bitmap pane
+		sce.b = {};
+		sce.b.r = [1024,1024,448,28];
+		sce.b.c = dom.canvas(sce.b.r);
+		dom.add(sce.b.c);
+		sce.b.c.can.dataset.x = "pane";
+		sce.b.c.can.addEventListener("click", sce.click, false);
 	}
 }
 // render
@@ -64,6 +76,13 @@ var ren = {
 	"splash": function() {
 		sce.a.c.con.fillStyle = rgba.rand();
 		sce.a.c.con.fillRect(0,0,sce.a.c.can.width,sce.a.c.can.height);
+	},
+	"pane": function() {
+		sce.b.c.con.fillStyle = rgba.rand();
+		sce.b.c.con.fillRect(0,0,sce.b.c.can.width,sce.b.c.can.height);
+	},
+	"bmp": function(b0) {
+		// bit array data in pane
 	}
 }
 // dom

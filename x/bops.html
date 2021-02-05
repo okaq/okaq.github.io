@@ -46,7 +46,13 @@ var a = {
 	    ren.splash();
 	    sce.two();
 	    ren.pane();
-    }
+
+	    window.setTimeout(a.cyc2, 1000);
+    },
+	"cyc2": function() {
+		bit.rand();
+		ren.bit();
+	}
 }
 // scene
 var sce = {
@@ -83,6 +89,41 @@ var ren = {
 	},
 	"bmp": function(b0) {
 		// bit array data in pane
+		sce.b.c.con.fillStyle = rgba.rand();
+		for (let i = 0; i < b0.length; i++) {
+			if (b0[i] == 0) {
+				continue;
+			}
+			let x0 = i % 32;
+			let x1 = (x0 * 32) >>> 0;
+			let y0 = (i / 32) >>> 0;
+			let y1 = (y0 * 32) >>> 0;
+			sce.b.c.con.fillRect(x1,y1,32,32);
+		}
+	},
+	"bit": function() {
+		// ren.clear();
+		ren.bmp(bit.a[0]);
+	}
+}
+// generator
+var gen = {
+	"rand": function() {
+		// uniform random 1024-bit array
+		let r0 = [];
+		for (let i = 0; i < 1024; i++) {
+			let r1 = (Math.random() > 0.5) ? 1 : 0;
+			r0[i] = r1;
+		}
+		return r0;
+	}
+}
+// bitmap
+var bit = {
+	"rand": function() {
+		// history buffer
+		bit.a = [];
+		bit.a[0] = gen.rand();
 	}
 }
 // dom

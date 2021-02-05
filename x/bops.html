@@ -126,6 +126,33 @@ var bit = {
 		bit.a[0] = gen.rand();
 	}
 }
+// bitmap operations
+var bop = {
+	"rows": function(b0) {
+		// return rows as array
+		let r0 = [];
+		for (let y = 0; y < 32; y++) {
+			r0[y] = [];
+			for (let x = 0; x < 32; x++) {
+				let i0 = (y * 32) + x;
+				r0[y].push(b0[i0]);
+			}
+		}
+		return r0;
+	},
+	"cols": function(b0) {
+		// return cols
+		let r0 = [];
+		for (let x = 0; x < 32; x++) {
+			r0[x] = [];
+			for (let y = 0; y < 32; y++) {
+				let i0 = (y * 32) + x;
+				r0[x].push(b0[i0]);
+			}
+		}
+		return r0;
+	}
+}
 // dom
 var dom = {
     "init": function() {

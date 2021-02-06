@@ -52,6 +52,18 @@ var a = {
 	"cyc2": function() {
 		bit.rand();
 		ren.bit();
+
+		window.setTimeout(a.cyc3, 1000);
+	},
+	"cyc3": function() {
+		bit.invr();
+		ren.inv();
+
+		window.setTimeout(a.cyc4, 1000);
+	},
+	"cyc4": function() {
+		bit.invc()
+		ren.inv();
 	}
 }
 // scene
@@ -104,6 +116,10 @@ var ren = {
 	"bit": function() {
 		// ren.clear();
 		ren.bmp(bit.a[0]);
+	},
+	"inv": function() {
+		ren.pane();
+		ren.bmp(bit.a[1]);
 	}
 }
 // generator
@@ -116,6 +132,21 @@ var gen = {
 			r0[i] = r1;
 		}
 		return r0;
+	},
+	"invr": function() {
+		// vertical symmetry
+		let r0 = gen.rand();
+		let r1 = bop.rows(r0);
+		for (let i = 16; i < 32; i++) {
+			let i0 = i - 16;
+			let i1 = 15 - i0;
+			r1[i] = r1[i1];
+		}
+		let r2 = bop.flat(r1);
+		return r2;
+	},
+	"invc": function() {
+		// horizontal symmetry
 	}
 }
 // bitmap
@@ -124,6 +155,12 @@ var bit = {
 		// history buffer
 		bit.a = [];
 		bit.a[0] = gen.rand();
+	},
+	"invr": function() {
+		bit.a[1] = gen.invr();
+	},
+	"invc": function() {
+		bit.a[1] = gen.invc();
 	}
 }
 // bitmap operations
@@ -151,6 +188,8 @@ var bop = {
 			}
 		}
 		return r0;
+	},
+	"flat": function() {
 	}
 }
 // dom

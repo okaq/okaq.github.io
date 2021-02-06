@@ -59,7 +59,7 @@ var a = {
 		bit.invr();
 		ren.inv();
 
-		window.setTimeout(a.cyc4, 1000);
+		window.setTimeout(a.cyc4, 10000);
 	},
 	"cyc4": function() {
 		bit.invc()
@@ -142,11 +142,21 @@ var gen = {
 			let i1 = 15 - i0;
 			r1[i] = r1[i1];
 		}
-		let r2 = bop.flat(r1);
+		let r2 = bop.flatr(r1);
 		return r2;
 	},
 	"invc": function() {
 		// horizontal symmetry
+		let r0 = gen.rand();
+		let r1 = bop.cols(r0);
+		for (let i = 16; i < 32; i++) {
+			let i0 = i - 16;
+			let i1 = 15 - i0;
+			r1[i] = r1[i1];
+		}
+		let r2 = bop.flatc(r1);
+		return r2;
+
 	}
 }
 // bitmap
@@ -189,7 +199,26 @@ var bop = {
 		}
 		return r0;
 	},
-	"flat": function() {
+	"flatr": function(b0) {
+		let r0 = [];
+		for (let i = 0; i < b0.length; i++) {
+			let b1 = b0[i];
+			for (let j = 0; j < b1.length; j++) {
+				r0.push(b1[j]);
+			}
+		}
+		return r0;
+	},
+	"flatc": function(b0) {
+		let r0 = [];
+		for (let i = 0; i < b0.length; i++) {
+			let b1 = b0[i];
+			for (let j = 0; j < b1.length; j++) {
+				let i0 = j * 32 + i;
+				r0[i0] = b1[j];
+			}
+		}
+		return r0;
 	}
 }
 // dom

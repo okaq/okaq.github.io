@@ -59,7 +59,7 @@ var a = {
 		bit.invr();
 		ren.inv();
 
-		window.setTimeout(a.cyc4, 10000);
+		window.setTimeout(a.cyc4, 1000);
 	},
 	"cyc4": function() {
 		bit.invc()
@@ -217,6 +217,36 @@ var bop = {
 				let i0 = j * 32 + i;
 				r0[i0] = b1[j];
 			}
+		}
+		return r0;
+	},
+	"flipr": function(b0) {
+		// flip vertical
+		// assume decompose into rows
+		let r0 = [];
+		for (let i = 0; i < b0.length; i++) {
+			let b1 = b0[i];
+			let b2 = bop.reva(b1);
+			r0.push(b2);
+		}
+		return r0;
+	},
+	"flipc": function(b0) {
+		// flip horizontal
+		// assume decompose into cols
+		let r0  = [];
+		for (let i = 0; i < b0.length; i++) {
+			let b1 = b0[i];
+			let b2 = bop.reva(b1);
+			r0.push(b2);
+		}
+		return r0;
+	},
+	"reva": function(b0) {
+		// reverse an array
+		let r0 = [];
+		for (let i = b0.length - 1; i >= 0; i--) {
+			r0.push(b0[i]);
 		}
 		return r0;
 	}

@@ -41,11 +41,18 @@ var a = {
  
     },
     "cyc": function() {
-	    console.log("nano games");
+	    console.log("logo swan");
 
 	    bmp.logo();
 	    sce.pane();
 	    ren.logo();
+
+		a.id = window.setTimeout(a.cyc2, 5000);
+	},
+	"cyc2": function() {
+		// remove logo
+		sce.deep();
+		txt.nano();
 	}
 }
 // scene
@@ -65,6 +72,19 @@ var sce = {
 		dom.add(sce.b.c);
 		sce.b.c.can.dataset.x = "pane";
 		sce.b.c.can.addEventListener("click", sce.click, false);
+	},
+	"deep": function() {
+		dom.remove(sce.b.c);
+	}
+}
+// text
+var txt = {
+	"nano": function() {
+		txt.a = {};
+		txt.a.a = "nano games at peta scale";
+		txt.a.b = txt.a.a.split(" ");
+		txt.a.c = txt.a.b.map(el => el.toUpperCase().split(""));
+		console.log(txt.a);
 	}
 }
 // render

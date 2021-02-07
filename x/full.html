@@ -42,6 +42,10 @@ var a = {
     },
     "cyc": function() {
 	    console.log("nano games");
+
+	    bmp.logo();
+	    sce.logo();
+	    ren.logo();
 	}
 }
 // scene
@@ -53,6 +57,17 @@ var sce = {
 		dom.add(sce.a.c);
 		sce.a.c.can.dataset.x = "bkgd";
 		sce.a.c.can.addEventListener("click", sce.click, false);
+	},
+	"logo": function() {
+	}
+}
+// render
+var ren = {
+	"bkgd": function() {
+	},
+	"logo": function() {
+		ren.bkgd();
+		ren.bmp(bmp.b, sce.b.c);
 	}
 }
 // dom
@@ -112,7 +127,13 @@ var bmp = {
             }
         }
         return r0;
-    }
+    },
+	"logo": function() {
+		// golf man logo
+		let b0 = base64DecToArr(golf.man);
+		bmp.b = bmp.exp(b0);
+		// generalize bmp decode
+	}
 }
 // colors
 var rgba = {
@@ -192,6 +213,10 @@ var rgba = {
     "Y": "/////////////////////////////////5/5//+P8f//h+H//8fh///Dw///48f//+GH///xj///8A////gf///4H////D////w////8P////D////w////8P////D////w////8P////n////////////////////////////8=",
     "Z": "/////////////////////////////////8AD//+AAf//gAH////D////w////4f///8P////D////h////w////8P///+H////j////w////4f///+P////D////g////4AB//+AAf////////////////////////////////8="
     }
+// golf man logo
+var golf = {
+	"man": "///////////////////////4B///+Af///gH///4B///+Af///g////4P///+D////g////4P///+D////g////4z///wM///8DP///Px///z8f///////////////////////////////////////////////////////////8="
+}
 // string view
 /*\
   |*|

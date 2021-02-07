@@ -85,6 +85,25 @@ var txt = {
 		txt.a.b = txt.a.a.split(" ");
 		txt.a.c = txt.a.b.map(el => el.toUpperCase().split(""));
 		console.log(txt.a);
+		// layout
+		txt.a.d = [];
+		txt.a.d[0] = [128,128];
+		txt.a.d[1] = [128,228];
+		txt.a.d[2] = [128,328];
+		txt.a.d[3] = [128,428];
+		txt.a.d[4] = [128,528];
+		txt.a.e = [];
+		for (let i = 0; i < txt.a.d.length; i++) {
+			// rects
+			let r0 = [];
+			let w0 = txt.a.c[i].length * 32;
+			let h0 = 32;
+			r0[0] = w0;
+			r0[1] = h0;
+			r0[2] = txt.a.d[i][0];
+			r0[3] = txt.a.d[i][1];
+			txt.a.e[i] = r0;
+		}
 	}
 }
 // render

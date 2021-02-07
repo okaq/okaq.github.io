@@ -13,6 +13,7 @@ import (
 const (
 	INDEX = "xonix.html"
 	BOPS = "bops.html"
+	FULL = "full.html"
 )
 
 func motd() {
@@ -28,10 +29,15 @@ func BopsHandler(w http.ResponseWriter, r *http.Request) {
 	http.ServeFile(w,r,BOPS)
 }
 
+func FullHandler(w http.ResponseWriter, r *http.Request) {
+	http.ServeFile(w,r,FULL)
+}
+
 func main() {
 	motd()
 	http.HandleFunc("/", XonixHandler)
 	http.HandleFunc("/b", BopsHandler)
+	http.HandleFunc("/c", FullHandler)
 	http.ListenAndServe(":8080", nil)
 }
 

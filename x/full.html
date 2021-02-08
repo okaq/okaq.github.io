@@ -154,6 +154,32 @@ var ren = {
 		for (let i = 0; i < sce.c.c.length; i++) {
 			sce.c.c[i].con.fillStyle = rgba.css([255,255,255,1.0]);
 			sce.c.c[i].con.fillRect(0,0,sce.c.c[i].can.width,sce.c.c[i].can.height);
+			ren.txt(txt.a.c[i], sce.c.c[i]);
+		}
+	},
+	"txt": function(t0,c0) {
+		// text string as array chars
+		c0.con.fillStyle = rgba.css([0,0,0,1.0]);
+		for (let i = 0; i < t0.length; i++) {
+			let t1 = t0[i];
+			let b0 = bmp.a[t1];
+			let p0 = [];
+			p0[0] = 32 * i;
+			p0[1] = 0;
+			ren.txt2(b0,p0,c0);
+		}
+	},
+	"txt2": function(b0,p0,c0) {
+		// draw char at position
+		for (let i = 0; i < b0.length; i++) {
+			if (b0[i] == 1) {
+				continue;
+			}
+			let x0 = i % 32;
+			let x1 = x0 + p0[0];
+			let y0 = (i / 32) >>> 0;
+			let y1 = y0 + p0[1];
+			c0.con.fillRect(x1,y1,1,1);
 		}
 	}
 }

@@ -53,6 +53,8 @@ var a = {
 		// remove logo
 		sce.deep();
 		txt.nano();
+		sce.nano();
+		ren.nano();
 	}
 }
 // scene
@@ -75,6 +77,18 @@ var sce = {
 	},
 	"deep": function() {
 		dom.remove(sce.b.c);
+	},
+	"nano": function() {
+		sce.c = {};
+		sce.c.r = [];
+		sce.c.c = [];
+		for (let i = 0; i < txt.a.e.length; i++) {
+			sce.c.r[i] = txt.a.e[i];
+			sce.c.c[i] = dom.canvas(sce.c.r[i]);
+			dom.add(sce.c.c[i]);
+			sce.c.c[i].can.dataset.x = "text_" + txt.a.b[i];
+			sce.c.c[i].can.addEventListener("click", sce.click, false);
+		}
 	}
 }
 // text
@@ -134,6 +148,12 @@ var ren = {
 			let y0 = (i / 32) >>> 0;
 			let y1 = (y0 * 32) >>> 0;
 			c0.con.fillRect(x1,y1,32,32);
+		}
+	},
+	"nano": function() {
+		for (let i = 0; i < sce.c.c.length; i++) {
+			sce.c.c[i].con.fillStyle = rgba.css([255,255,255,1.0]);
+			sce.c.c[i].con.fillRect(0,0,sce.c.c[i].can.width,sce.c.c[i].can.height);
 		}
 	}
 }

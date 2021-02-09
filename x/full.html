@@ -62,6 +62,7 @@ var a = {
 		// screen dims
 		sce.nanor();
 		sce.screen();
+		db.cell();
 	}
 }
 // scene
@@ -118,11 +119,35 @@ var sce = {
 		// grid count nx
 		sce.d.f = (sce.d.b / sce.d.d) >>> 0;
 		// grid count ny
-		sce.d.g = (sce.d.c / sce.d.f) >>> 0;
+		sce.d.g = (sce.d.c / sce.d.e) >>> 0;
 		// grid count nt
 		sce.d.h = (sce.d.f * sce.d.g) >>> 0;
 
 		console.log(sce.d);
+	}
+}
+// data
+var db = {
+	"cell": function() {
+		// cells within cells
+		db.a = {};
+		db.a.a = [];
+		db.a.b = {};
+		for (let i = 0; i < sce.d.h; i++) {
+			db.a.a[i] = {};
+			// index, position (x,y), state, name
+			db.a.a[i].a = i;
+			db.a.a[i].b = [];
+			let x0 = i % sce.d.f;
+			let x1 = (x0 * sce.d.d) >>> 0;
+			let y0 = (i / sce.d.f) >>> 0;
+			let y1 = (y0 * sce.d.e) >>> 0;
+			db.a.a[i].b[0] = x1;
+			db.a.a[i].b[1] = y1;
+			db.a.a[i].c = 0;
+			db.a.a[i].d = "cell_" + x0 + "_" + y0;
+			db.a.b[db.a.a[i].d] = db.a.a[i].a;
+		}
 	}
 }
 // text

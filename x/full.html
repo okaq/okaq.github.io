@@ -63,6 +63,22 @@ var a = {
 		sce.nanor();
 		sce.screen();
 		db.cell();
+
+		// timed tests
+
+		// data shuffle
+		let t0 = window.performance.now();
+		db.rand();
+		let t1 = window.performance.now();
+		let t2 = t1 - t0;
+		console.log("data update time: " + t2);
+
+		// grid scene
+		let t0 = window.performance.now();
+		sce.grid();
+		let t1 = window.performance.now();
+		let t2 = t1 - t0;
+		console.log("grid canvas: " + t2);
 	}
 }
 // scene
@@ -147,6 +163,11 @@ var db = {
 			db.a.a[i].c = 0;
 			db.a.a[i].d = "cell_" + x0 + "_" + y0;
 			db.a.b[db.a.a[i].d] = db.a.a[i].a;
+		}
+	},
+	"rand": function() {
+		for (let i = 0; i < sce.d.h; i++) {
+			db.a.a[i].c = (Math.random() > 0.5) ? 1 : 0;
 		}
 	}
 }

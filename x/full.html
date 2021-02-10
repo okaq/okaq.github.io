@@ -86,8 +86,6 @@ var a = {
 		let t1 = window.performance.now();
 		let t2 = t1 - t0;
 		console.log("grid render time: " + t2);
-
-
 	}
 }
 // scene
@@ -282,6 +280,16 @@ var ren = {
 			let y0 = (i / 32) >>> 0;
 			let y1 = y0 + p0[1];
 			c0.con.fillRect(x1,y1,1,1);
+		}
+	},
+	"grid": function() {
+		for (let i = 0; i < sce.d.h; i++) {
+			if (db.a.a[i].c == 0) {
+				sce.e.c[i].con.fillStyle = rgba.css([0,0,0,1.0]);
+			} else {
+				sce.e.c[i].con.fillStyle = rgba.css([255,255,255,1.0]);
+			}
+			sce.e.c[i].con.fillRect(0,0,sce.e.c[i].can.width,sce.e.c[i].can.height);
 		}
 	}
 }

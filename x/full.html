@@ -56,7 +56,8 @@ var a = {
 		sce.nano();
 		ren.nano();
 
-		a.id = window.setTimeout(a.cyc3, 5000);
+		// a.id = window.setTimeout(a.cyc3, 5000);
+		a.id = window.setTimeout(a.cyc4, 5000);
 	},
 	"cyc3": function() {
 		// screen dims
@@ -74,18 +75,37 @@ var a = {
 		console.log("data update time: " + t2);
 
 		// grid scene
-		let t0 = window.performance.now();
+		t0 = window.performance.now();
 		sce.grid();
-		let t1 = window.performance.now();
-		let t2 = t1 - t0;
+		t1 = window.performance.now();
+		t2 = t1 - t0;
 		console.log("grid canvas time: " + t2);
 
 		// rand render
-		let t0 = window.performance.now();
+		t0 = window.performance.now();
 		ren.grid();
+		t1 = window.performance.now();
+		t2 = t1 - t0;
+		console.log("grid render time: " + t2);
+
+		// splits:
+		// update data 15ms
+		// populate canvas 5000ms
+		// render 50,000ms ANR
+	},
+	"cyc4": function() {
+		sce.nanor();
+		sce.screen();
+		db.cell();
+
+		// single canvas frame update
+		let t0 = window.performance.now();
+		ren.grid2();
 		let t1 = window.performance.now();
 		let t2 = t1 - t0;
-		console.log("grid render time: " + t2);
+		console.log("frame time: " + t2);
+
+		// frame render grid 190ms
 	}
 }
 // scene
@@ -290,6 +310,21 @@ var ren = {
 				sce.e.c[i].con.fillStyle = rgba.css([255,255,255,1.0]);
 			}
 			sce.e.c[i].con.fillRect(0,0,sce.e.c[i].can.width,sce.e.c[i].can.height);
+		}
+	},
+	"grid2": function() {
+		for (let i = 0; i < sce.d.h; i++) {
+			let f0 = Math.random();
+			if (f0 > 0.5) {
+				sce.a.c.con.fillStyle = rgba.css([255,255,255,1.0]);
+			} else {
+				sce.a.c.con.fillStyle = rgba.css([0,0,0,1.0]);
+			}
+			let x0 = i % sce.d.f;
+			let x1 = (x0 * sce.d.d) >>> 0;
+			let y0 = (i / sce.d.f) >>> 0;
+			let y1 = (y0 * sce.d.e) >>> 0;
+			sce.a.c.con.fillRect(x1,y1,sce.d.d,sce.d.e);
 		}
 	}
 }

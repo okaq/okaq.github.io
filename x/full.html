@@ -78,7 +78,16 @@ var a = {
 		sce.grid();
 		let t1 = window.performance.now();
 		let t2 = t1 - t0;
-		console.log("grid canvas: " + t2);
+		console.log("grid canvas time: " + t2);
+
+		// rand render
+		let t0 = window.performance.now();
+		ren.grid();
+		let t1 = window.performance.now();
+		let t2 = t1 - t0;
+		console.log("grid render time: " + t2);
+
+
 	}
 }
 // scene
@@ -140,6 +149,19 @@ var sce = {
 		sce.d.h = (sce.d.f * sce.d.g) >>> 0;
 
 		console.log(sce.d);
+	},
+	"grid": function() {
+		// cells defined
+		sce.e = {};
+		sce.e.r = [];
+		sce.e.c = [];
+		for (let i = 0; i < sce.d.h; i++) {
+			sce.e.r[i] = [sce.d.d,sce.d.e,db.a.a[i].b[0],db.a.a[i].b[1]];
+			sce.e.c[i] = dom.canvas(sce.e.r[i]);
+			dom.add(sce.e.c[i]);
+			sce.e.c[i].can.dataset.x = db.a.a[i].d;
+			sce.e.c[i].can.addEventListener("click", sce.click, false);
+		}
 	}
 }
 // data

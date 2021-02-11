@@ -14,6 +14,7 @@ const (
 	INDEX = "xonix.html"
 	BOPS = "bops.html"
 	FULL = "full.html"
+	PLAY = "play.html"
 )
 
 func motd() {
@@ -33,11 +34,16 @@ func FullHandler(w http.ResponseWriter, r *http.Request) {
 	http.ServeFile(w,r,FULL)
 }
 
+func PlayHandler(w http.ResponseWriter, r *http.Request) {
+	http.ServeFile(w,r,PLAY)
+}
+
 func main() {
 	motd()
 	http.HandleFunc("/", XonixHandler)
 	http.HandleFunc("/b", BopsHandler)
 	http.HandleFunc("/c", FullHandler)
+	http.HandleFunc("/d", PlayHandler)
 	http.ListenAndServe(":8080", nil)
 }
 

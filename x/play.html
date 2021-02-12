@@ -65,7 +65,26 @@ var sce = {
 		console.log(e);
 	}.
 	"screen": function() {
-		sce.b = {};
+		sce.d = {};
+		sce.d.a = window.screen;
+		console.log("screen depth");
+		// console.log(sce.d);
+		// available width
+		sce.d.b = sce.d.a.availWidth;
+		// available height
+		sce.d.c = sce.d.a.availHeight;
+		// grid width
+		sce.d.d = 4;
+		// grid height
+		sce.d.e = 4;
+		// grid count nx
+		sce.d.f = (sce.d.b / sce.d.d) >>> 0;
+		// grid count ny
+		sce.d.g = (sce.d.c / sce.d.e) >>> 0;
+		// grid count nt
+		sce.d.h = (sce.d.f * sce.d.g) >>> 0;
+
+		console.log(sce.d);
 	}
 }
 // data

@@ -90,7 +90,19 @@ var sce = {
 // data
 var db = {
 	"grid": function() {
-		db.a = {};
+		db.a = [];
+		db.b = {};
+		for (let i = 0; i < sce.d.h; i++) {
+			db.a[i] = {};
+			db.a[i].x = i % sce.d.f;
+			db.a[i].y = (i / sce.d.f);
+			db.a[i].a = "cell_" + db.a[i].y + "_" + db.a[i].x;
+			db.a[i].d = 0;
+			db.b[db.a[i].a] = i;
+		}
+	},
+	"field": function() {
+		// field of play, 80% inner area
 	}
 }
 // dom

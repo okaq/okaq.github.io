@@ -112,7 +112,25 @@ var txt = {
 		// create and render pane
 		txt.a = {};
 		txt.a.a = t0;
-		txt.a.b = txt.a.a.toUpperCase().split(" ");
+		txt.a.b = txt.a.a.split(" ");
+		txt.a.c = txt.a.b.map(el => toUpperCase().split(""));
+		
+		// layout
+		txt.b = {};
+		txt.b.r = [];
+		let x0 = 128;
+		let y0 = 128;
+		let w0 = 32;
+		let h0 = 32;
+		for (let i = 0; i < txt.a.c.length; i++) {
+			let w1 = (w0 * txt.a.c[i].length) >>> 0;
+			let y1 = ((i + 1) * y0) >>> 0;
+			let r0 = [w1,h0,x0,y1];
+			txt.b.r.push(r0);
+		}
+		// canvas
+		txt.b.c = [];
+		// render
 
 		// the way to render
 		// clear bkgd to black

@@ -50,6 +50,8 @@ var a = {
 	"cyc2": function() {
 		sce.screen();
 		db.grid();
+
+		ren.field();
 	}
 }
 // scene
@@ -63,7 +65,7 @@ var sce = {
 	},
 	"click": function(e) {
 		console.log(e);
-	}.
+	},
 	"screen": function() {
 		sce.d = {};
 		sce.d.a = window.screen;
@@ -138,6 +140,25 @@ var txt = {
 	},
 	"nim": function() {
 		// remove the current pane
+	}
+}
+// render
+var ren = {
+	"clear": function() {
+		sce.a.c.con.fillStyle = rgba.css([0,0,0,a.0]);
+		sce.a.c.con.fillRect(0,0,sce.a.c.can.width,sce.a.c.can.height);
+	},
+	"field": function() {
+		// field of play
+		ren.clear();
+		for (let i = 0; i < sce.d.h; i++) {
+			sce.a.c.con.fillStyle = rgba.rmon();
+			let x0 = db.a[i].x * sce.d.e;
+			let y0 = db.a[i].y * sce.d.f;
+			let w0 = sce.d.e;
+			let h0 = sce.d.f;
+			sce.a.c.con.fillRect(x0,y0,w0,h0);
+		}
 	}
 }
 // dom

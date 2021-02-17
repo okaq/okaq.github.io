@@ -6,14 +6,14 @@
         <meta name="viewport" content="width=1920,height=1080,initial-scale=1" />
         <meta name="source" content="https://github.com/okaq/ichiry" />
         <meta name="creator" content="AQ<aq@okaq.com>" />
-        <meta name="date" content="2021-02-12" />
+        <meta name="date" content="2021-02-18" />
         <link rel="shortcut icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAIAAAD8GO2jAAAAMklEQVR4nGKRNH/IQEvARFPTRy0YtWDUglELRi0YtWDUglELRi0YtWDUAioCQAAAAP//JGYBdI4ZOy8AAAAASUVORK5CYII=" />
         <style type="text/css">
             html,body{width:1920px;height:1080px;margin:0px;padding:0px;border:0px;background-color:rgba(255,255,255,1.0);}
         </style>
         <script type="text/javascript">
             // ok
-        console.log("okaq xonix!");
+        console.log("okaq infinity!");
         // async
         (function(){
          window.addEventListener("load",function(e){a.init(e);},false);
@@ -41,17 +41,13 @@ var a = {
  
     },
     "cyc": function() {
-	    console.log("play xonix");
+	    console.log("play infinity");
 	    
 	    ren.clear();
 
 	    a.id = window.setTimeout(a.cyc2, 1000);
     },
 	"cyc2": function() {
-		sce.screen();
-		db.grid();
-
-		ren.field();
 	}
 }
 // scene
@@ -65,81 +61,6 @@ var sce = {
 	},
 	"click": function(e) {
 		console.log(e);
-	},
-	"screen": function() {
-		sce.d = {};
-		sce.d.a = window.screen;
-		console.log("screen depth");
-		// console.log(sce.d);
-		// available width
-		sce.d.b = sce.d.a.availWidth;
-		// available height
-		sce.d.c = sce.d.a.availHeight;
-		// grid width
-		sce.d.d = 4;
-		// grid height
-		sce.d.e = 4;
-		// grid count nx
-		sce.d.f = (sce.d.b / sce.d.d) >>> 0;
-		// grid count ny
-		sce.d.g = (sce.d.c / sce.d.e) >>> 0;
-		// grid count nt
-		sce.d.h = (sce.d.f * sce.d.g) >>> 0;
-
-		console.log(sce.d);
-	}
-}
-// data
-var db = {
-	"grid": function() {
-		db.a = [];
-		db.b = {};
-		for (let i = 0; i < sce.d.h; i++) {
-			db.a[i] = {};
-			db.a[i].x = i % sce.d.f;
-			db.a[i].y = (i / sce.d.f);
-			db.a[i].a = "cell_" + db.a[i].y + "_" + db.a[i].x;
-			db.a[i].d = 0;
-			db.b[db.a[i].a] = i;
-		}
-	},
-	"field": function() {
-		// field of play, 80% inner area
-	}
-}
-// text
-var txt = {
-	"pim": function(t0) {
-		// input single string
-		// create and render pane
-		txt.a = {};
-		txt.a.a = t0;
-		txt.a.b = txt.a.a.split(" ");
-		txt.a.c = txt.a.b.map(el => toUpperCase().split(""));
-		
-		// layout
-		txt.b = {};
-		txt.b.r = [];
-		let x0 = 128;
-		let y0 = 128;
-		let w0 = 32;
-		let h0 = 32;
-		for (let i = 0; i < txt.a.c.length; i++) {
-			let w1 = (w0 * txt.a.c[i].length) >>> 0;
-			let y1 = ((i + 1) * y0) >>> 0;
-			let r0 = [w1,h0,x0,y1];
-			txt.b.r.push(r0);
-		}
-		// canvas
-		txt.b.c = [];
-		// render
-
-		// the way to render
-		// clear bkgd to black
-		// insert text boxes
-	},
-	"nim": function() {
-		// remove the current pane
 	}
 }
 // render
@@ -147,21 +68,7 @@ var ren = {
 	"clear": function() {
 		sce.a.c.con.fillStyle = rgba.css([0,0,0,a.0]);
 		sce.a.c.con.fillRect(0,0,sce.a.c.can.width,sce.a.c.can.height);
-	},
-	"field": function() {
-		// field of play
-		ren.clear();
-		for (let i = 0; i < sce.d.h; i++) {
-			sce.a.c.con.fillStyle = rgba.rmon();
-			let w0 = sce.d.d;
-			let h0 = sce.d.e;
-			let x0 = (db.a[i].x * w0) >>> 0;
-			let y0 = (db.a[i].y * h0) >>> 0;
-	
-			sce.a.c.con.fillRect(x0,y0,w0,h0);
-		}
 	}
-}
 // dom
 var dom = {
     "init": function() {

@@ -112,6 +112,20 @@ var db = {
 
 		// falling diamonds nano game
 		// at each step move left / right
+	},
+	"grid2": function() {
+		// set dimesnions and states
+		db.a = [];
+		for (let i = 0; i < 1024; i++) {
+			db.a[i] = {};
+			db.a[i].a = 0;
+		}
+		// state enum
+		// 0: empty
+		// 1: horizontal
+		// 2: vertical
+		// 3: radioactive
+		// 4: mutant
 	}
 }
 // text

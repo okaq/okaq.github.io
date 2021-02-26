@@ -53,6 +53,8 @@ var a = {
 		db.grid();
 
 		sce.grid();
+
+		ren.grid();
 	}
 }
 // scene
@@ -178,8 +180,24 @@ var txt = {
 // render
 var ren = {
 	"clear": function() {
-		sce.a.c.con.fillStyle = rgba.css([0,0,0,a.0]);
+		sce.a.c.con.fillStyle = rgba.css([0,0,0,1.0]);
 		sce.a.c.con.fillRect(0,0,sce.a.c.can.width,sce.a.c.can.height);
+	},
+	"clear2": function() {
+		sce.b.c.con.fillStyle = rgba.css([255,255,255,1.0]);
+		sce.b.c.con.fillRect(0,0,sce.b.c.can.width,sce.b.c.can.height);
+	},
+	"grid": function() {
+		ren.clear();
+		ren.clear2();
+		for (let i = 0; i < 1024; i++) {
+			let x0 = i % 32;
+			let x1 = (x0 * 32) >>> 0;
+			let y0 = (i / 32) >>> 0;
+			let y1 = (y0 * 32) >>> 0;
+			sce.b.c.con.fillStyle = rgba.rmon();
+			sce.b.c.con.fillRect(x1,y1,32,32);
+		}
 	}
 }
 // dom

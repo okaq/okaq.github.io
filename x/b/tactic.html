@@ -51,6 +51,8 @@ var a = {
 		sce.screen();
 
 		db.grid();
+
+		sce.grid();
 	}
 }
 // scene
@@ -59,6 +61,7 @@ var sce = {
 		sce.a = {};
 		sce.a.r = [1920,1080,0,0];
 		sce.a.c = dom.canvas(sce.a.r);
+		dom.add(sce.a.c);
 		sce.a.c.can.dataset.x = "bkgd";
 		sce.a.c.can.addEventListener("click", sce.click, false);
 	},
@@ -86,6 +89,15 @@ var sce = {
 		sce.d.h = (sce.d.f * sce.d.g) >>> 0;
 
 		console.log(sce.d);
+	},
+	"grid": function() {
+		// centered square to render grid
+		sce.b = {};
+		sce.b.r = [1024,1024,448,26];
+		sce.b.c = dom.canvas(sce.b.r);
+		dom.add(sce.b.c);
+		sce.b.c.can.dataset.x = "grid";
+		sce.b.c.can.addEventListener("click", sce.click, false);
 	}
 }
 // data

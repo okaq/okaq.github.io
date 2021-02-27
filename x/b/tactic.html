@@ -55,6 +55,12 @@ var a = {
 		sce.grid();
 
 		ren.grid();
+
+		a.id = window.setTimeout(a.cyc3, 1000);
+	},
+	"cyc3": function() {
+		// rand radioactive 24%
+		db.rad();
 	}
 }
 // scene
@@ -140,6 +146,17 @@ var db = {
 		// 2: vertical
 		// 3: radioactive
 		// 4: mutant
+	},
+	"rad": function() {
+		// call grid2 to clear
+		// 24% radioactive cells to begin
+		let r0 = 0.24;
+		for (let i = 0; i < 1024; i++) {
+			let f0 = Math.random();
+			if (f0 <= r0) {
+				db.a[i].a = 3;
+			}
+		}
 	}
 }
 // text

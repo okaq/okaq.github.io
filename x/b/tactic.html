@@ -61,6 +61,8 @@ var a = {
 	"cyc3": function() {
 		// rand radioactive 24%
 		db.rad();
+
+		ren.grid2();
 	}
 }
 // scene
@@ -213,6 +215,27 @@ var ren = {
 			let y0 = (i / 32) >>> 0;
 			let y1 = (y0 * 32) >>> 0;
 			sce.b.c.con.fillStyle = rgba.rmon();
+			sce.b.c.con.fillRect(x1,y1,32,32);
+		}
+	},
+	"grid2": function() {
+		// draw the data
+		ren.clear();
+		ren.clear2();
+		let c0 = [];
+		c0[0] = 1 * 255 / 6;
+		c0[1] = 2 * 255 / 6;
+		c0[2] = 3 * 255 / 6;
+		c0[3] = 4 * 255 / 6;
+		c0[4] = 5 * 255 / 6;
+		for (let i = 0; i < 1024; i++) {
+			let x0 = i % 32;
+			let x1 = (x0 * 32) >>> 0;
+			let y0 = (i / 32) >>> 0;
+			let y1 = (y0 * 32) >>> 0;
+			let c1 = db.a[i].a;
+			let c2 = [c1,c1,c1,1.0];
+			sce.b.c.con.fillStyle = rgba.css(c2);
 			sce.b.c.con.fillRect(x1,y1,32,32);
 		}
 	}

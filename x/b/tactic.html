@@ -122,11 +122,22 @@ var sce = {
 		console.log("game live");
 	},
 	"click2": function(e) {
+		// coordinates
 		console.log(e);
 		console.log("clientX: " + e.clientX);
 		console.log("clientY: " + e.clientY);
 		console.log("offsetX: " + e.offsetX);
 		console.log("offsetY: " + e.offsetY);
+
+		// cells
+		sce.b.d = {};
+		sce.b.d.a = [e.offsetX,e.offsetY];
+		let x0 = e.offsetX % 32;
+		let y0 = (e.ofsetY / 32) >>> 0;
+		sce.b.d.b = [x0,y0];
+		let i0 = ((y0 * 32) + x0) >>> 0;
+		sce.b.d.c = i0;
+		console.log(sce.b.d);
 	}
 }
 // data

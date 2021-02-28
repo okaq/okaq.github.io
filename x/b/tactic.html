@@ -60,9 +60,16 @@ var a = {
 	},
 	"cyc3": function() {
 		// rand radioactive 24%
+		db.grid2();
 		db.rad();
 
 		ren.grid2();
+
+		a.id = window.setTimeout(a.cyc4, 1000);
+	},
+	"cyc4": function() {
+		// attach grid pane click handler
+		sce.pick();
 	}
 }
 // scene
@@ -108,6 +115,18 @@ var sce = {
 		dom.add(sce.b.c);
 		sce.b.c.can.dataset.x = "grid";
 		sce.b.c.can.addEventListener("click", sce.click, false);
+	},
+	"pick": function() {
+		sce.b.c.can.removeEventListener("click", sce.click);
+		sce.b.c.can.addEventListener("click", sce.click2, false);
+		console.log("game live");
+	},
+	"click2": function(e) {
+		console.log(e);
+		console.log("clientX: " + e.clientX);
+		console.log("clientY: " + e.clientY);
+		console.log("offsetX: " + e.offsetX);
+		console.log("offsetY: " + e.offsetY);
 	}
 }
 // data
@@ -223,21 +242,23 @@ var ren = {
 		ren.clear();
 		ren.clear2();
 		let c0 = [];
-		c0[0] = 1 * 255 / 6;
-		c0[1] = 2 * 255 / 6;
-		c0[2] = 3 * 255 / 6;
-		c0[3] = 4 * 255 / 6;
-		c0[4] = 5 * 255 / 6;
+		c0[0] = (1 * 255 / 6) >>> 0;
+		c0[1] = (2 * 255 / 6) >>> 0;
+		c0[2] = (3 * 255 / 6) >>> 0;
+		c0[3] = (4 * 255 / 6) >>> 0;
+		c0[4] = (5 * 255 / 6) >>> 0;
 		for (let i = 0; i < 1024; i++) {
 			let x0 = i % 32;
 			let x1 = (x0 * 32) >>> 0;
 			let y0 = (i / 32) >>> 0;
 			let y1 = (y0 * 32) >>> 0;
 			let c1 = db.a[i].a;
-			let c2 = [c1,c1,c1,1.0];
-			sce.b.c.con.fillStyle = rgba.css(c2);
+			let c2 = c0[c1];
+			let c3 = [c2,c2,c2,1.0];
+			sce.b.c.con.fillStyle = rgba.css(c3);
 			sce.b.c.con.fillRect(x1,y1,32,32);
 		}
+		console.log(db.a);
 	}
 }
 // dom

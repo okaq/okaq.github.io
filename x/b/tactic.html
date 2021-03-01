@@ -132,12 +132,15 @@ var sce = {
 		// cells
 		sce.b.d = {};
 		sce.b.d.a = [e.offsetX,e.offsetY];
-		let x0 = e.offsetX % 32;
-		let y0 = (e.ofsetY / 32) >>> 0;
+		let x0 = (e.offsetX / 32) >>> 0;
+		let y0 = (e.offsetY / 32) >>> 0;
 		sce.b.d.b = [x0,y0];
 		let i0 = ((y0 * 32) + x0) >>> 0;
 		sce.b.d.c = i0;
 		console.log(sce.b.d);
+
+		// render
+		ren.click();
 	}
 }
 // data
@@ -270,6 +273,15 @@ var ren = {
 			sce.b.c.con.fillRect(x1,y1,32,32);
 		}
 		console.log(db.a);
+	},
+	"click": function() {
+		let p0 = sce.b.d.b;
+		let x0 = p0[0];
+		let x1 = (x0 * 32) >>> 0;
+		let y0 = p0[1];
+		let y1 = (y0 * 32) >>> 0;
+		sce.b.c.con.fillStyle = rgba.css([255,0,0,1.0]);
+		sce.b.c.con.fillRect(x1,y1,32,32);
 	}
 }
 // dom

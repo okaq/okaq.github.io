@@ -76,6 +76,7 @@ var a = {
 		// click begins a unique loop per bacterial origin
 
 		sce.pick2();
+		ren.button();
 	}
 }
 // scene
@@ -163,10 +164,10 @@ var sce = {
 		sce.c.d[0] = 0;
 		sce.c.d[1] = 0;
 		// click handlers
-		sce.c.c.can.dataset.x = "horizontal";
-		sce.c.c.can.addEventListener("click", sce.click3, false);
-		sce.c.c.can.dataset.x = "vertical";
-		sce.c.c.can.addEventListener("click", sce.click4, false);
+		sce.c.c[0].can.dataset.x = "horizontal";
+		sce.c.c[0].can.addEventListener("click", sce.click3, false);
+		sce.c.c[1].can.dataset.x = "vertical";
+		sce.c.c[1].can.addEventListener("click", sce.click4, false);
 	},
 	"click3": function(e) {
 		console.log(e);
@@ -316,6 +317,13 @@ var ren = {
 		let y1 = (y0 * 32) >>> 0;
 		sce.b.c.con.fillStyle = rgba.css([255,0,0,1.0]);
 		sce.b.c.con.fillRect(x1,y1,32,32);
+	},
+	"button": function() {
+		sce.c.c[0].con.fillStyle = rgba.css([255,0,0,1.0]);
+		sce.c.c[0].con.fillRect(0,0,sce.c.c[0].can.width,sce.c.c[0].can.height);
+		
+		sce.c.c[1].con.fillStyle = rgba.css([0,0,255,1.0]);
+		sce.c.c[1].con.fillRect(0,0,sce.c.c[1].can.width,sce.c.c[1].can.height);
 	}
 }
 // dom

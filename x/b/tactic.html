@@ -69,7 +69,13 @@ var a = {
 	},
 	"cyc4": function() {
 		// attach grid pane click handler
-		sce.pick();
+		// sce.pick();
+		
+		// create H & V buttons
+		// attach handlers
+		// click begins a unique loop per bacterial origin
+
+		sce.pick2();
 	}
 }
 // scene
@@ -141,6 +147,34 @@ var sce = {
 
 		// render
 		ren.click();
+	},
+	"pick2": function() {
+		sce.c = {};
+		sce.c.r = [];
+		sce.c.r[0] = [128,128,64,64];
+		sce.c.r[1] = [128,128,64,256];
+		sce.c.c = [];
+		sce.c.c[0] = dom.canvas(sce.c.r[0]);
+		sce.c.c[1] = dom.canvas(sce.c.r[1]);
+		dom.add(sce.c.c[0]);
+		dom.add(sce.c.c[1]);
+		// local clicked state for rendering
+		sce.c.d = [];
+		sce.c.d[0] = 0;
+		sce.c.d[1] = 0;
+		// click handlers
+		sce.c.c.can.dataset.x = "horizontal";
+		sce.c.c.can.addEventListener("click", sce.click3, false);
+		sce.c.c.can.dataset.x = "vertical";
+		sce.c.c.can.addEventListener("click", sce.click4, false);
+	},
+	"click3": function(e) {
+		console.log(e);
+		// choose horizontal propagating bacterium
+	},
+	"click4": function(e) {
+		console.log(e);
+		// choose vertical
 	}
 }
 // data

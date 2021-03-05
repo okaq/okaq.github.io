@@ -172,10 +172,16 @@ var sce = {
 	"click3": function(e) {
 		console.log(e);
 		// choose horizontal propagating bacterium
+		sce.c.d[0] = 1;
+		sce.c.d[1] = 0;
+		console.log("horizontal propagating bacterium chosen!");
 	},
 	"click4": function(e) {
 		console.log(e);
 		// choose vertical
+		sce.c.d[0] = 0;
+		sce.c.d[1] = 0;
+		console.log("vertical propagating bacterium chosen!");
 	}
 }
 // data
@@ -324,6 +330,23 @@ var ren = {
 		
 		sce.c.c[1].con.fillStyle = rgba.css([0,0,255,1.0]);
 		sce.c.c[1].con.fillRect(0,0,sce.c.c[1].can.width,sce.c.c[1].can.height);
+	},
+	"button2": function() {
+		for (let i = 0; i < sce.c.c.length; i++) {
+			let c0 = sce.c.c[i];
+			let d0 = sce.c.d[i];
+			let c1 = 255;
+			if (d0 == 1) {
+				c1 = 128;
+			}
+			let c2 = [c1,c1,c1,1.0];
+			let c3 = rgba.css(c2);
+			c0.con.fillStyle = c3;
+			c0.con.fillRect(0,0,c0.can.width,c0.can.height);
+		}
+
+		// can string replace rgba construct
+		// with any sub pattern [R,G,B,A]
 	}
 }
 // dom

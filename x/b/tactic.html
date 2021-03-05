@@ -77,6 +77,10 @@ var a = {
 
 		sce.pick2();
 		ren.button();
+	},
+	"user": function() {
+		// render user updates
+		ren.button2();
 	}
 }
 // scene
@@ -175,6 +179,7 @@ var sce = {
 		sce.c.d[0] = 1;
 		sce.c.d[1] = 0;
 		console.log("horizontal propagating bacterium chosen!");
+		window.setTimeout(a.user, 10);
 	},
 	"click4": function(e) {
 		console.log(e);
@@ -182,6 +187,7 @@ var sce = {
 		sce.c.d[0] = 0;
 		sce.c.d[1] = 0;
 		console.log("vertical propagating bacterium chosen!");
+		window.setTimeout(a.user, 10);
 	}
 }
 // data

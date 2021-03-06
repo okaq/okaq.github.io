@@ -81,6 +81,9 @@ var a = {
 	"user": function() {
 		// render user updates
 		ren.button2();
+
+		// replace color with text ("H,V")
+		// start animation loop per tick frame 1fps
 	}
 }
 // scene
@@ -353,6 +356,26 @@ var ren = {
 
 		// can string replace rgba construct
 		// with any sub pattern [R,G,B,A]
+	},
+	"glyph": function(g0,c0) {
+		// render single char in canvas
+		// get canvas dimensions for text draw
+		let w0 = c0.r[0];
+		let h0 = c0.r[1];
+		let w1 = (w0 / 32) >>> 0;
+		let h1 = (h0 / 32) >>> 0;
+		c0.con.fillStyle = rgba.css([0,0,0,1.0]);
+		let b0 = bmp.a[g0];
+		for (let i = 0; i < b0.length; i++) {
+			if (b0[i] == 0) {
+				continue;
+			}
+			let x0 = i % 32;
+			let x1 = (x0 * w1) >>> 0;
+			let y0 = (i / 32) >>> 0;
+			let y1 = (y0 * h1) >>> 0;
+			c0.con.fillRect(x1,y1,w1,h1);
+		}
 	}
 }
 // dom

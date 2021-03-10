@@ -23,9 +23,14 @@ func TacticHandler(w http.ResponseWriter, r *http.Request) {
 	http.ServeFile(w,r,INDEX)
 }
 
+func NotoHandler(w http.ResponseWriter, r *http.Request) {
+	http.ServeFile(w,r,"noto_emoji_2.json")
+}
+
 func main() {
 	motd()
 	http.HandleFunc("/", TacticHandler)
+	http.HandleFunc("/a", NotoHandler)
 	http.ListenAndServe(":8080", nil)
 }
 

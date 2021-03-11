@@ -280,6 +280,18 @@ var txt = {
 
 	}
 }
+// xhr
+var net = {
+	"noto": function() {
+		// async fetch bitmap set
+		net.a = [];
+		net.a[0] = "http://localhost:8080/a";
+
+		window.fetch(net.a[0])
+		.then(res => res.json())
+		.then(data => console.log(data));
+	}
+}
 // render
 var ren = {
 	"clear": function() {

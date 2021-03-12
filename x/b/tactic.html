@@ -93,6 +93,17 @@ var a = {
 		// procedural
 		// bitmap
 		// bit ops
+
+	},
+	"noto": function() {
+		// rand emoji render test
+		// pick from keys
+		let f0 = (Math.random() * net.c.length) >>> 0;
+		let k0 = net.c[f0];
+		let b0 = net.b[k0];
+		let b1 = bmp.exp(base64DecToArr(b0));
+		console.log(b1.length);
+		ren.bmp(b1);
 	}
 }
 // scene
@@ -309,6 +320,9 @@ var net = {
 		}
 		console.log(net.c.length);
 		// 888 emoji set fetch'd
+
+		// rand render
+		window.setTimeout(a.noto, 1000);
 	}
 }
 // render
@@ -408,6 +422,9 @@ var ren = {
 			let y1 = (y0 * h1) >>> 0;
 			c0.con.fillRect(x1,y1,w1,h1);
 		}
+	},
+	"bmp": function(b0) {
+		// render bitmap data in central pane      
 	}
 }
 // dom
